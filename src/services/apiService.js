@@ -34,6 +34,26 @@ export const getUsers = async () => { // Fetches User Data
     }
 };
 
+export const getArticles = async () => { // Fetches User Data
+    try {
+        fetch("http://localhost:3000/articles?player=Messi&team=Barca&game=Valo")
+            .then(response => {
+                if (!response.ok) throw new Error("Network response was not ok");
+                return response.json();
+            })
+            .then(data => {
+                console.log("Fetched Articles:", data);
+                // do something with the articles, e.g., set state
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+            });
+
+    } catch (error) {
+        throw new Error('Failed to fetch users');
+    }
+};
+
 export const getUserById = async (id) => { // Fetch specific user by id
     const token = localStorage.getItem('token');
     const response = await fetch(`${API_BASE_URL}/users/${id}`, {

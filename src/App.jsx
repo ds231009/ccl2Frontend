@@ -1,10 +1,12 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import LoginPage from './components/LoginPage'
-import HomePage from './components/HomePage'
-import UsersPage from './components/UsersPage'
-import UserDetailPage from './components/UserDetailPage'
-import UserFormPage from './components/UserFormPage'
-import ProtectedRoute from './components/ProtectedRoute'
+import LoginPage from './components/LoginPage.jsx'
+import HomePage from './components/HomePage.jsx'
+import Articles from './components/DemoArticles.jsx'
+import UsersPage from './components/UsersPage.jsx'
+import UserDetailPage from './components/UserDetailPage.jsx'
+import UserFormPage from './components/UserFormPage.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+import ArticleList from "./components/DemoArticles.jsx";
 
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
             <Routes>
                 {/* Public Routes */}
                 <Route path={"/"} element={<HomePage /> }/>
+                <Route path={"/articles"} element={<ArticleList /> }/>
                 <Route path={"/login"} element={<LoginPage /> }/>
 
                 {/* Protected routes */}
