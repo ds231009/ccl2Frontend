@@ -34,25 +34,35 @@ export const getUsers = async () => { // Fetches User Data
     }
 };
 
-export const getArticles = async () => { // Fetches User Data
-    try {
-        fetch("http://localhost:3000/articles?player=Messi&team=Barca&game=Valo")
-            .then(response => {
-                if (!response.ok) throw new Error("Network response was not ok");
-                return response.json();
-            })
-            .then(data => {
-                console.log("Fetched Articles:", data);
-                // do something with the articles, e.g., set state
-            })
-            .catch(error => {
-                console.error("Fetch error:", error);
-            });
+export const getArticles = async (filters = {}) => {
+    // Remove null or undefined values
+    const validFilters = Object.fromEntries(
+        Object.entries(filters).filter(([_, v]) => v != null)
+    );
 
+    const query = new URLSearchParams(validFilters).toString();
+    const url = `http://localhost:3000/articles${query ? `?${query}` : ""}`;
+    console.log("Fetching:", url);
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    return await response.json();
+};
+
+
+export const getArticle = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:3000/articles/${id}`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        return data;
     } catch (error) {
-        throw new Error('Failed to fetch users');
+        console.error("Fetch error:", error);
+        throw error;
     }
 };
+
 
 export const getUserById = async (id) => { // Fetch specific user by id
     const token = localStorage.getItem('token');
