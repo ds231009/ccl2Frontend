@@ -50,6 +50,17 @@ export const getArticles = async (filters = {}) => {
     return await response.json();
 };
 
+export const getHomeArticles = async () => {
+    try {
+        const response = await fetch(`http://localhost:3000/`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Fetch error:", error);
+        throw error;
+    }
+};
 
 export const getArticle = async (id) => {
     try {
@@ -62,7 +73,6 @@ export const getArticle = async (id) => {
         throw error;
     }
 };
-
 
 export const getUserById = async (id) => { // Fetch specific user by id
     const token = localStorage.getItem('token');

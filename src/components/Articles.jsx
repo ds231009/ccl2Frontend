@@ -13,10 +13,15 @@ function ArticlesList() {
     const player = searchParams.get("player");
     const team = searchParams.get("team");
     const game = searchParams.get("game");
+    const page = parseInt(searchParams.get("page"));
+    const size = parseInt(searchParams.get("size"));
+
+    console.log(searchParams.get("page"), searchParams.get("size"));
+    console.log(page, size);
 
     useEffect(() => {
         apiService
-            .getArticles({ player, team, game })
+            .getArticles({ player, team, game, page, size })
             .then(data => {
                 setArticles(data);
                 setLoading(false);
@@ -25,7 +30,7 @@ function ArticlesList() {
                 setError(error.message);
                 setLoading(false);
             });
-    }, [player, team, game]);
+    }, [player, team, game, page, size]);
 
     if (loading) return <p>Loading articles...</p>;
     if (error) return <p>Error: {error}</p>;
