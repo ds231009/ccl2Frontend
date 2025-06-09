@@ -1,4 +1,6 @@
-
+button {
+    transition: color 1.6s ease;
+}
 
 .FormCon {
     justify-self:  center;

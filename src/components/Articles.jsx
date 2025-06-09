@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import * as apiService from "../services/apiService";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import SmallArticle from "./ui/SmallArticle"
 import styles from "./Articles.module.css";
 
 function ArticlesList() {
@@ -154,30 +155,7 @@ function ArticlesList() {
                 {/*{articles.length === 0 && <p>No articles found.</p>}*/}
 
                 {articles.map(article => (
-                    <div key={article.id} className={styles.smallArticleCon} onClick={() => navigate(`/articles/${article.id}`)}>
-                        <div className={styles.smallArticle}>
-                            <div className={styles.imageWrapper}>
-                                <img src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=300`} alt={article.title} />
-                            </div>
-                            <div className={styles.smallArticlesDesc}>
-                                <div className={styles.smallArticlesHeader}>
-                                    <div>
-                                        <h2>{article.title}</h2>
-                                        <div className={styles.Underline}></div>
-                                    </div>
-                                    <p>{new Intl.DateTimeFormat('de-DE').format(new Date(article.timestamp))}</p>
-                                </div>
-                                <div className={styles.ItemCon}>
-                                    {article.games.map((g, i) => <div key={i} className={styles.ItemBox}>{g}</div>)}
-                                    {article.teams.map((t, i) => <div key={i} className={styles.ItemBox}>{t}</div>)}
-                                    {article.players.map((p, i) => <div key={i} className={styles.ItemBox}>{p}</div>)}
-                                </div>
-                                <p>{article.text.slice(0, 200) + "[...]"}</p>
-                                <p><strong>Comments:</strong> {article.comment_count}</p>
-                            </div>
-                        </div>
-                        <div className={styles.SmallLine} />
-                    </div>
+                    <SmallArticle key={article.id} article={article} detailed />
                 ))}
             </main>
             <Footer />

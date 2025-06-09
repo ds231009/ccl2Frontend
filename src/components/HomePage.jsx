@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import * as apiService from "../services/apiService.js";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
+import SmallArticleCard from "./ui/SmallArticle.jsx";
 
 import styles from "./HomePage.module.css";
 
@@ -63,25 +64,8 @@ function HomePage() {
                     </div>
                     <div className={styles.MidLine} />
                     <div className={styles.smallArticles}>
-                        {articles.slice(1).map(article => (
-                            <div onClick={() => navigate("/articles/"+article.id)} key={article.id} className={styles.smallArticleCon}>
-                                <div className={styles.smallArticle}>
-                                    <div className={styles.imageWrapper}>
-                                        <img src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=300`} alt={article.title}/>
-                                    </div>
-                                    <div className={styles.smallArticlesDesc}>
-                                        <div>
-                                            <div>
-                                                <h2>{article.title}</h2>
-                                                <div className={styles.Underline}></div>
-                                            </div>
-                                            <p>{new Intl.DateTimeFormat('de-DE').format(new Date(article.timestamp))}</p>
-                                        </div>
-                                        <p>{article.text.slice(0,200) + "[...]"}</p>
-                                    </div>
-                                </div>
-                                <div className={styles.SmallLine}/>
-                            </div>
+                        {articles.map(article => (
+                            <SmallArticleCard key={article.id} article={article} />
                         ))}
                     <button onClick={() => navigate("/articles?page=1")} className="darkButton">See more</button>
                     </div>

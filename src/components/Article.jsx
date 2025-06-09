@@ -38,12 +38,12 @@ function ArticlePage() {
     return (
         <div className="article-container">
             <Header />
-            <main style={{ padding: "1rem" }}>
+            <main>
                 <div className={styles.Articles}>
-                    <div onClick={() => navigate("/articles/")}>← Go back</div>
-                    <div onClick={() => navigate("/articles/"+article.id)} className={styles.firstArticle}>
+                    <div onClick={() => navigate("/articles/")} className={styles.GoBack}>🠈 Go back</div>
+                    <div className={styles.firstArticle}>
                         <div className={styles.FirstImageWrapper}>
-                            <img src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=960`} alt={article.title} />
+                            <img src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=1280`} alt={article.title} />
                         </div>
                         <div>
                              <h1>{article.title}</h1>
@@ -59,7 +59,11 @@ function ArticlePage() {
                             {' | '}
                             {new Intl.DateTimeFormat('de-DE').format(new Date(article.timestamp))}
                         </span>
-                        <p>{article.text}</p>
+                        <div className={styles.Text}>
+                            {article.text.split('\n').map((line, index) => (
+                                <p key={index}>{line}</p>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </main>

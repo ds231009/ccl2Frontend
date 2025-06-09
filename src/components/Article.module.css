@@ -32,13 +32,6 @@
 
 }
 
-.firstArticle > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
 .MidLine {
     width: 30%;
     margin: 0 auto;
@@ -58,6 +51,17 @@
     margin: 0 auto;
     height: 2px;
     background-color: var(--light-color);
+}
+
+.Text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.GoBack {
+    cursor: pointer;
+    width: fit-content;
 }
 
 @media (max-width: 950px) {

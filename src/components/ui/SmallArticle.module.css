@@ -3,7 +3,7 @@
     width: 61.8%;
     height: 4px;
     background-color: var(--highlight-color);
-    transition: width 0.6s ease;
+    transition: all 0.5s ease;
 }
 
 .SmallLine {
@@ -13,56 +13,18 @@
     background-color: var(--light-color);
 }
 
-.Articles {
-    /*width: calc(100cqw - max(40%,60px));*/
-    width: 70%;
-    margin: 0 auto;
+.smallArticleCon h2, .smallArticleCon p, .smallArticleCon .imageWrapper {
+    pointer-events: auto;
+}
+.smallArticleCon {
+    pointer-events: none;
+}
+
+.smallArticlesDesc {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-.Filters {
-    width: 100%;
-    height: 160px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.5s ease;
-}
-
-.FilterCon {
-    width: 240px;
-}
-
-.Filter {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.FilterDropdown {
-    height: 35px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    background-color: var(--secondary-color);
-    border-radius: 2px;
-}
-
-select[multiple] {
-    width: 100%;
-    height: 100%;
-    padding: 6px;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    overflow-y: auto;
-    transition: height 2s ease;
+    gap: 1vh;
 }
 
 .smallArticleCon {
@@ -78,14 +40,13 @@ select[multiple] {
     display: flex;
     gap: 1rem;
     align-items: center;
+
 }
 .smallArticle:hover .Underline {
     background-color: var(--highlight-color2);
     width: 75%;
 
 }
-
-
 
 .imageWrapper {
     width: 300px;
@@ -97,7 +58,6 @@ select[multiple] {
     overflow: hidden;
 }
 
-
 .smallArticlesDesc {
     flex: 1;
     display: flex;
@@ -108,7 +68,9 @@ select[multiple] {
 .smallArticlesHeader{
     width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    gap: 10px;
     align-items: center;
 }
 
@@ -130,20 +92,7 @@ select[multiple] {
 }
 
 
-
-
-/*select[multiple]:hover {*/
-/*    height: fit-content;*/
-/*}*/
-/*.FilterCon:hover {*/
-/*    height: 120px;*/
-/*}*/
-
 @media (max-width: 950px) {
-    /*.smallArticles {*/
-    /*    width: 80%;*/
-    /*}*/
-
     .smallArticlesDesc > p {
         display: none;
     }
