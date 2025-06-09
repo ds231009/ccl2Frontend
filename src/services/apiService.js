@@ -14,6 +14,16 @@ export const login = async (email, password) => { // Login
     return await response.json(); // includes token
 };
 
+export const signup = async (userData) => {
+    const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+    });
+    if (!response.ok) throw new Error('Sign up failed');
+    return response.json();
+};
+
 export const getUsers = async () => { // Fetches User Data
     try {
         const token = localStorage.getItem('token');

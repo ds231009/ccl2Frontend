@@ -43,8 +43,8 @@ function HomePage() {
                     <div>NAV Ig</div>
                     <div>LOGO</div>
                     <div className={styles.buttons}>
-                        <button className="darkButton">Log in</button>
-                        <button className="lightButton">Sign up</button>
+                        <button className="darkButton" onClick={() => navigate("/login", { state: { mode: "login" } })}>Log in</button>
+                        <button className="lightButton" onClick={() => navigate("/login", { state: { mode: "signup" } })}>Sign up</button>
                     </div>
                 </div>
                 <div className={styles.Articles}>
@@ -67,8 +67,7 @@ function HomePage() {
                             <div onClick={() => navigate("/articles/"+article.id)} key={article.id} className={styles.smallArticleCon}>
                                 <div className={styles.smallArticle}>
                                     <div className={styles.imageWrapper}>
-                                        <img src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=300`} alt={article.title} loading="lazy"/>
-
+                                        <img src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=300`} alt={article.title}/>
                                     </div>
                                     <div className={styles.smallArticlesDesc}>
                                         <div>
