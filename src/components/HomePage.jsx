@@ -48,14 +48,16 @@ function HomePage() {
                     </div>
                 </div>
                 <div className={styles.Articles}>
-                    <div onClick={() => navigate(`/articles/${articles[0].id}`)} className={styles.firstArticle}>
-                        <img src={articles[0].img_path} alt={articles[0].title} />
+                    <div onClick={() => navigate("/articles/"+articles[0].id)} className={styles.firstArticle} loading="lazy">
+                        <div className={styles.FirstImageWrapper}>
+                            <img src={`http://localhost:3000/thumbnail/${articles[0].img_path}.jpg?width=960`} alt={articles[0].title} />
+                        </div>
                         <div>
                             <div>
                                 <h1>{articles[0].title}</h1>
                                 <div className={styles.Underline}></div>
                             </div>
-                            <p>{articles[0].timestamp}</p>
+                            <p>{new Intl.DateTimeFormat('de-DE').format(new Date(articles[0].timestamp))}</p>
                         </div>
                         <p>{articles[0].text.slice(0,300) + " [...]"}</p>
                     </div>
@@ -65,7 +67,8 @@ function HomePage() {
                             <div onClick={() => navigate("/articles/"+article.id)} key={article.id} className={styles.smallArticleCon}>
                                 <div className={styles.smallArticle}>
                                     <div className={styles.imageWrapper}>
-                                        <img src={article.img_path} alt={article.title} />
+                                        <img src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=300`} alt={article.title} loading="lazy"/>
+
                                     </div>
                                     <div className={styles.smallArticlesDesc}>
                                         <div>
@@ -81,6 +84,7 @@ function HomePage() {
                                 <div className={styles.SmallLine}/>
                             </div>
                         ))}
+                    <button onClick={() => navigate("/articles?page=1")} className="darkButton">See more</button>
                     </div>
                 </div>
             </main>

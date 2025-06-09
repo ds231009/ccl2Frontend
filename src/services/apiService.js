@@ -50,6 +50,36 @@ export const getArticles = async (filters = {}) => {
     return await response.json();
 };
 
+export const getGames = async () => {
+    const url = `http://localhost:3000/references/games`;
+    console.log("Fetching:", url);
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    return await response.json();
+};
+
+export const getTeams = async () => {
+    const url = `http://localhost:3000/references/teams`;
+    console.log("Fetching:", url);
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    return await response.json();
+};
+
+export const getPlayers = async () => {
+    const url = `http://localhost:3000/references/players`;
+    console.log("Fetching:", url);
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    return await response.json();
+};
+
 export const getHomeArticles = async () => {
     try {
         const response = await fetch(`http://localhost:3000/`);
