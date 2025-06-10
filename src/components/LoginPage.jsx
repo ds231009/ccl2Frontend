@@ -23,7 +23,8 @@ function Login() {
             if (mode === 'login') {
                 console.log(email, password);
                 const data = await apiService.login(email, password);
-                localStorage.setItem('token', data.token);
+                console.log(data);
+                // No need to store token in localStorage - it's in cookies now
                 navigate('/articles');
             } else {
                 const userData = {
@@ -37,11 +38,22 @@ function Login() {
                 console.log(userData)
 
                 const data = await apiService.signup(userData);
-                localStorage.setItem('token', data.token);
+                // No need to store token in localStorage - it's in cookies now
                 navigate('/articles');
             }
         } catch (error) {
             setError(error.message);
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+            await apiService.logout();
+            navigate('/login');
+        } catch (error) {
+            console.error('Logout failed:', error);
+            // Even if logout fails, redirect to login
+            navigate('/login');
         }
     };
 
@@ -61,18 +73,18 @@ function Login() {
                                 required
                             />
                             <input className="halfForm"
-                                placeholder="First Name"
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
+                                   placeholder="First Name"
+                                   type="text"
+                                   value={name}
+                                   onChange={(e) => setName(e.target.value)}
+                                   required
                             />
                             <input className="halfForm"
-                                placeholder="Last Name"
-                                type="text"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                                required
+                                   placeholder="Last Name"
+                                   type="text"
+                                   value={lastName}
+                                   onChange={(e) => setLastName(e.target.value)}
+                                   required
                             />
                         </>
                     )}
@@ -96,7 +108,7 @@ function Login() {
                     <div className={styles.ChangeMode}>
                         {mode === 'signup' ?
                             <span>Already have an account? <span onClick={() => setMode("login")}>Log in</span></span>
-                        :
+                            :
                             <span>No account yet? <span onClick={() => setMode("signup")}>Sign up</span></span>
                         }
                     </div>

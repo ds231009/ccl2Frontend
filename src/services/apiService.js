@@ -1,37 +1,132 @@
 const API_BASE_URL = 'http://localhost:3000';
 
 export const login = async (email, password) => { // Login
+    console.log(email, password);
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        credentials: 'include', // Include cookies in request
+        body: JSON.stringify({ email, password })
     });
 
     if (!response.ok) { // If Login data is wrong, throw error
         const errorData = await response.json();
         throw new Error(errorData.message || 'Login failed');
     }
-    return await response.json(); // includes token
+    return await response.json();
 };
 
 export const signup = async (userData) => {
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // Include cookies in request
         body: JSON.stringify(userData),
     });
     if (!response.ok) throw new Error('Sign up failed');
     return response.json();
 };
 
+export const logout = async () => {
+    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+        method: 'POST',
+        credentials: 'include',
+    });
+    return response.ok;
+};
+
+// Articles
+
+export const getArticles = async (filters = {}) => {
+    // Remove null or undefined values
+    const validFilters = Object.fromEntries(
+        Object.entries(filters).filter(([_, v]) => v != null)
+    );
+
+    const query = new URLSearchParams(validFilters).toString();
+    const url = `http://localhost:3000/articles${query ? `?${query}` : ""}`;
+    console.log("Fetching:", url);
+
+    const response = await fetch(url, {
+        credentials: 'include', // Include cookies
+    });
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    return await response.json();
+};
+
+export const getHomeArticles = async () => {
+    try {
+        const response = await fetch(`http://localhost:3000/`, {
+            credentials: 'include', // Include cookies
+        });
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Fetch error:", error);
+        throw error;
+    }
+};
+
+export const getArticle = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:3000/articles/${id}`, {
+            credentials: 'include', // Include cookies
+        });
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Fetch error:", error);
+        throw error;
+    }
+};
+
+
+// References
+
+export const getGames = async () => {
+    const url = `http://localhost:3000/references/games`;
+    console.log("Fetching:", url);
+
+    const response = await fetch(url, {
+        credentials: 'include', // Include cookies
+    });
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    return await response.json();
+};
+
+export const getTeams = async () => {
+    const url = `http://localhost:3000/references/teams`;
+    console.log("Fetching:", url);
+
+    const response = await fetch(url, {
+        credentials: 'include', // Include cookies
+    });
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    return await response.json();
+};
+
+export const getPlayers = async () => {
+    const url = `http://localhost:3000/references/players`;
+    console.log("Fetching:", url);
+
+    const response = await fetch(url, {
+        credentials: 'include', // Include cookies
+    });
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    return await response.json();
+};
+
+// Users
+
 export const getUsers = async () => { // Fetches User Data
     try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/users`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        const response = await fetch(`${API_BASE_URL}/admin/users`)
 
         if (!response.ok) { // Error
             throw new Error('Failed to fetch users');
@@ -44,82 +139,9 @@ export const getUsers = async () => { // Fetches User Data
     }
 };
 
-export const getArticles = async (filters = {}) => {
-    // Remove null or undefined values
-    const validFilters = Object.fromEntries(
-        Object.entries(filters).filter(([_, v]) => v != null)
-    );
-
-    const query = new URLSearchParams(validFilters).toString();
-    const url = `http://localhost:3000/articles${query ? `?${query}` : ""}`;
-    console.log("Fetching:", url);
-
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Network response was not ok");
-
-    return await response.json();
-};
-
-export const getGames = async () => {
-    const url = `http://localhost:3000/references/games`;
-    console.log("Fetching:", url);
-
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Network response was not ok");
-
-    return await response.json();
-};
-
-export const getTeams = async () => {
-    const url = `http://localhost:3000/references/teams`;
-    console.log("Fetching:", url);
-
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Network response was not ok");
-
-    return await response.json();
-};
-
-export const getPlayers = async () => {
-    const url = `http://localhost:3000/references/players`;
-    console.log("Fetching:", url);
-
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Network response was not ok");
-
-    return await response.json();
-};
-
-export const getHomeArticles = async () => {
-    try {
-        const response = await fetch(`http://localhost:3000/`);
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Fetch error:", error);
-        throw error;
-    }
-};
-
-export const getArticle = async (id) => {
-    try {
-        const response = await fetch(`http://localhost:3000/articles/${id}`);
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Fetch error:", error);
-        throw error;
-    }
-};
-
 export const getUserById = async (id) => { // Fetch specific user by id
-    const token = localStorage.getItem('token');
     const response = await fetch(`${API_BASE_URL}/users/${id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+        credentials: 'include', // Include cookies (no Authorization header needed)
     });
 
     if (!response.ok) {
@@ -130,13 +152,12 @@ export const getUserById = async (id) => { // Fetch specific user by id
 };
 
 export const createUser = async (userData) => { // Creates new user
-    const token = localStorage.getItem('token');
     const response = await fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
         },
+        credentials: 'include', // Include cookies
         body: JSON.stringify(userData),
     });
 
@@ -148,13 +169,13 @@ export const createUser = async (userData) => { // Creates new user
     return await response.json();
 };
 
-export const updateUser = async (id, userData, token) => {
+export const updateUser = async (id, userData) => {
     const response = await fetch(`${API_BASE_URL}/users/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
         },
+        credentials: 'include', // Include cookies (no token parameter needed)
         body: JSON.stringify(userData),
     });
 
@@ -165,12 +186,10 @@ export const updateUser = async (id, userData, token) => {
     return await response.json();
 };
 
-export const deleteUser = async (id, token) => {
+export const deleteUser = async (id) => {
     const response = await fetch(`${API_BASE_URL}/users/${id}`, {
         method: 'DELETE',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+        credentials: 'include', // Include cookies (no token parameter needed)
     });
 
     if (!response.ok) {

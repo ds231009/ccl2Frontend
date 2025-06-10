@@ -72,17 +72,20 @@ button {
     margin: 0;
     border: none;
     border-radius: 4px;
+    font-size: 18px;
+    transition: all 0.2s  ease;
+}
 
+button:hover {
+    font-size: 18.4px;
 }
 
 .lightButton {
     background: var(--highlight-color);
-    transition: all 0.2s  ease;
 }
 
 .darkButton {
     background: var(--primary-color);
-    transition: all 0.4s ease;
 }
 
 .lightButton:hover {

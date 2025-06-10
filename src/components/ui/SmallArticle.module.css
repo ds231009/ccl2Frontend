@@ -15,6 +15,7 @@
 
 .smallArticleCon h2, .smallArticleCon p, .smallArticleCon .imageWrapper {
     pointer-events: auto;
+    cursor: pointer;
 }
 .smallArticleCon {
     pointer-events: none;
@@ -90,7 +91,6 @@
     background-color: var(--light-color);
     border-radius: 2px;
 }
-
 
 @media (max-width: 950px) {
     .smallArticlesDesc > p {
