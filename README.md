@@ -22,3 +22,10 @@
             - 💡 Biggest learning: Having to figure out what/if every route needs a Controller. 
             - ❌ Biggest mistake/blocker: Getting to into frontend after just testing around while I should just do the desogns first and take them as given and not player around.
             - 📌 Notes for tomorrow: More work on filtering in frontend. Nice display and filter option. 
+
+
+## Day Nr. 2 - 12.06.2025
+            - ✅ What I worked on today: Implimented AdminUser page. Same logic can hopefully be used for refrences and articles.
+            - 💡 Biggest learning: Full time job and ccl is a pleasure
+            - ❌ Biggest mistake/blocker: 
+            - 📌 Notes for tomorrow: Implement other admin pages and nice styling. Maybe already the create article
