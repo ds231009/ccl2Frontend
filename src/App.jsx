@@ -25,7 +25,7 @@ function App() {
                         <Article />
                     </ProtectedRoute>
                 } />
-                <Route path="/admin/users" element={
+                <Route path="/admin" element={
                     <ProtectedRoute>
                         <Admin />
                     </ProtectedRoute>

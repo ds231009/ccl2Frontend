@@ -52,6 +52,13 @@
     overflow: hidden;
 }
 
+.FirstImageWrapper > img {
+    width: 100%;
+    align-self: center;
+    justify-self: center;
+
+}
+
 
 .firstArticle > div {
     display: flex;
@@ -65,4 +72,12 @@
     margin: 0 auto;
     height: 2px;
     background-color: var(--light-color);
+}
+
+.smallArticles {
+    margin: 0 auto;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 15px;
 }

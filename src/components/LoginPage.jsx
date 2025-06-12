@@ -24,7 +24,7 @@ function Login() {
                 console.log(email, password);
                 const data = await apiService.login(email, password);
                 console.log(data);
-                // No need to store token in localStorage - it's in cookies now
+
                 navigate('/articles');
             } else {
                 const userData = {
@@ -65,37 +65,37 @@ function Login() {
                 <form onSubmit={handleSubmit} className={styles.InputForm}>
                     {mode === 'signup' && (
                         <>
-                            <input
+                            <input className={styles.Input}
                                 placeholder="Username"
                                 type="text"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
-                            <input className="halfForm"
+                            <input className={`${styles.Input} ${styles.halfForm}`}
                                    placeholder="First Name"
                                    type="text"
                                    value={name}
                                    onChange={(e) => setName(e.target.value)}
                                    required
                             />
-                            <input className="halfForm"
-                                   placeholder="Last Name"
-                                   type="text"
-                                   value={lastName}
-                                   onChange={(e) => setLastName(e.target.value)}
-                                   required
+                            <input className={`${styles.Input} ${styles.halfForm}`}
+                               placeholder="Last Name"
+                               type="text"
+                               value={lastName}
+                               onChange={(e) => setLastName(e.target.value)}
+                               required
                             />
                         </>
                     )}
-                    <input
+                    <input className={styles.Input}
                         placeholder="Email"
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <input
+                    <input className={styles.Input}
                         placeholder="Password"
                         type="password"
                         value={password}
@@ -107,9 +107,9 @@ function Login() {
                     </button>
                     <div className={styles.ChangeMode}>
                         {mode === 'signup' ?
-                            <span>Already have an account? <span onClick={() => setMode("login")}>Log in</span></span>
+                            <span>Already have an account? <strong onClick={() => setMode("login")}>Log in</strong></span>
                             :
-                            <span>No account yet? <span onClick={() => setMode("signup")}>Sign up</span></span>
+                            <span>No account yet? <strong onClick={() => setMode("signup")}>Sign up</strong></span>
                         }
                     </div>
                 </form>

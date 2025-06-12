@@ -7,7 +7,8 @@ function Header() {
 
     const handleLogout = async () => {
         console.log("logged out");
-        await fetch(`http://localhost:3000/auth/logout`);
+        await fetch(`http://localhost:3000/auth/logout`, {
+            credentials: "include"});
         navigate('/');
     }
 

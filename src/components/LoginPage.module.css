@@ -17,7 +17,38 @@ button {
     text-align: center;
 }
 
-.ChangeMode > span > span {
+.ChangeMode > span > strong {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.Input {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    font-family: inherit;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    text-indent: 8px;
+}
+
+.InputForm {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.halfForm {
+    width: 47%;
+}
+
+.Label {
+    display: block;
+    font-weight: bold;
 }

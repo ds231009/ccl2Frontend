@@ -29,7 +29,7 @@ export const signup = async (userData) => {
 
 export const logout = async () => {
     const response = await fetch(`${API_BASE_URL}/auth/logout`, {
-        method: 'POST',
+        method: 'GET',
         credentials: 'include',
     });
     return response.ok;
@@ -126,7 +126,9 @@ export const getPlayers = async () => {
 
 export const getUsers = async () => { // Fetches User Data
     try {
-        const response = await fetch(`${API_BASE_URL}/admin/users`)
+        const response = await fetch(`${API_BASE_URL}/admin/users`, {
+            credentials: 'include',
+        })
 
         if (!response.ok) { // Error
             throw new Error('Failed to fetch users');
@@ -170,13 +172,13 @@ export const createUser = async (userData) => { // Creates new user
 };
 
 export const updateUser = async (id, userData) => {
-    const response = await fetch(`${API_BASE_URL}/users/${id}`, {
-        method: 'PUT',
+    const response = await fetch(`${API_BASE_URL}/admin/users/${id}`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         credentials: 'include', // Include cookies (no token parameter needed)
-        body: JSON.stringify(userData),
+        body: JSON.stringify({id, userData}),
     });
 
     if (!response.ok) {
