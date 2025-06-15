@@ -38,9 +38,11 @@ export const logout = async () => {
 // Articles
 
 export const getArticles = async (filters = {}) => {
-    // Remove null or undefined values
+    // Convert array values to comma-separated strings and remove null/undefined
     const validFilters = Object.fromEntries(
-        Object.entries(filters).filter(([_, v]) => v != null)
+        Object.entries(filters)
+            .filter(([_, v]) => v != null)
+            .map(([k, v]) => [k, Array.isArray(v) ? v.join(',') : v])
     );
 
     const query = new URLSearchParams(validFilters).toString();
@@ -54,6 +56,7 @@ export const getArticles = async (filters = {}) => {
 
     return await response.json();
 };
+
 
 export const getHomeArticles = async () => {
     try {
@@ -83,6 +86,40 @@ export const getArticle = async (id) => {
     }
 };
 
+export const updateArticle = async (id, articleData) => {
+    const response = await fetch(`${API_BASE_URL}/articles/${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Include cookies (no token parameter needed)
+        body: JSON.stringify({id, articleData}),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to update user');
+    }
+
+    return await response.json();
+};
+
+export const createArticle = async (articleData) => { // Creates new user
+    const response = await fetch(`${API_BASE_URL}/articles/new`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Include cookies
+        body: JSON.stringify(articleData),
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'User creation failed');
+    }
+
+    return await response.json();
+};
 
 // References
 
@@ -126,7 +163,7 @@ export const getPlayers = async () => {
 
 export const getUsers = async () => { // Fetches User Data
     try {
-        const response = await fetch(`${API_BASE_URL}/admin/users`, {
+        const response = await fetch(`${API_BASE_URL}/users`, {
             credentials: 'include',
         })
 
@@ -172,8 +209,8 @@ export const createUser = async (userData) => { // Creates new user
 };
 
 export const updateUser = async (id, userData) => {
-    const response = await fetch(`${API_BASE_URL}/admin/users/${id}`, {
-        method: 'POST',
+    const response = await fetch(`${API_BASE_URL}/users/${id}`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },

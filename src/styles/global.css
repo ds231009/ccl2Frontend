@@ -41,6 +41,15 @@ header > div {
     justify-content: space-between;
 }
 
+.header-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #1a1a1a;
+}
+
 footer {
     color: var(--primary-color);
 }
@@ -66,13 +75,14 @@ main {
 }
 
 button {
-    width: 90px;
+    min-width: 90px;
     height: 35px;
     padding: 4px 12px;
     margin: 0;
     border: none;
     border-radius: 4px;
     font-size: 18px;
+    text-align: center;
     transition: all 0.2s  ease;
 }
 
@@ -87,21 +97,19 @@ button:hover {
 .darkButton {
     background: var(--primary-color);
 }
-
-.lightButton:hover {
-    /*width: 76px;*/
-    /*height: 28px;*/
-    /*margin: 4px 2px;*/
-    background: var(--highlight-color2);
-    /*border-radius: 16px;*/
+.adminButton  {
+    background: var(--light-color);
+    border: 2px solid  var(--highlight-color);
+    color: var(--primary-color);
 }
 
-.darkButton:hover {
-    /*width: 76px;*/
-    /*height: 28px;*/
-    /*margin: 4px 2px;*/
-    background: #000;
-    /*border-radius: 16px;*/
+.lightButton:hover {background: var(--highlight-color2)}
+
+.darkButton:hover {background: #000}
+
+.adminButton:hover {
+    background: var(--highlight-color);
+    color: white;
 }
 
 h1 {

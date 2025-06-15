@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as apiService from "../services/apiService.js";
 import styles from "./LoginPage.module.css";
+import { useLocation } from "react-router-dom";
 
 function Login() {
     const location = useLocation();
-    const [mode, setMode] = useState(location.state?.mode === 'signup' ? 'signup' : 'login')
+    const [mode, setMode] = useState(location.state?.mode === 'signup' ? 'signup' : 'login');
 
     const [email, setEmail] = useState('admin@admin.a');
     const [password, setPassword] = useState('admin');
@@ -25,7 +26,7 @@ function Login() {
                 const data = await apiService.login(email, password);
                 console.log(data);
 
-                navigate('/articles');
+                navigate('/');
             } else {
                 const userData = {
                     username,
@@ -37,23 +38,13 @@ function Login() {
 
                 console.log(userData)
 
-                const data = await apiService.signup(userData);
-                // No need to store token in localStorage - it's in cookies now
+                await apiService.signup(userData);
+
+                await apiService.login(userData.email, userData.password);
                 navigate('/articles');
             }
         } catch (error) {
             setError(error.message);
-        }
-    };
-
-    const handleLogout = async () => {
-        try {
-            await apiService.logout();
-            navigate('/login');
-        } catch (error) {
-            console.error('Logout failed:', error);
-            // Even if logout fails, redirect to login
-            navigate('/login');
         }
     };
 

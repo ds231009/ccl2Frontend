@@ -3,7 +3,7 @@
     width: 61.8%;
     height: 4px;
     background-color: var(--highlight-color);
-    transition: all 0.5s ease;
+    transition: all 0.25s ease;
 }
 
 .SmallLine {
@@ -17,7 +17,14 @@
     pointer-events: auto;
     cursor: pointer;
 }
+
 .smallArticleCon {
+    width: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
     pointer-events: none;
 }
 
@@ -28,13 +35,6 @@
     gap: 1vh;
 }
 
-.smallArticleCon {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
 
 .smallArticle {
     width: 100%;
@@ -45,6 +45,7 @@
 }
 .smallArticle:hover .Underline {
     background-color: var(--highlight-color2);
+    margin-left: 20px;
     width: 75%;
 
 }
@@ -60,9 +61,11 @@
 }
 
 .smallArticlesDesc {
+    width: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1vh;
 }
 

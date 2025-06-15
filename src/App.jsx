@@ -4,8 +4,19 @@ import HomePage from './components/HomePage.jsx'
 import Articles from "./components/Articles.jsx";
 import Article from "./components/Article.jsx";
 import Login from "./components/LoginPage.jsx";
-import Admin from "./components/AdminPage.jsx";
+import Profile from "./components/ProfilePage.jsx";
+import ProfileEdit from "./components/ProfileEditPage.jsx";
+
+import CreateArticle from "./components/CreateArticle.jsx";
+
+
+import AdminUsersPage from "./components/AdminUsersPage.jsx";
+import AdminReferencesPage from "./components/AdminReferencesPage.jsx";
+import AdminArticlesPage from "./components/AdminArticlesPage.jsx";
+
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminRoute from './components/AdminRoute'
+import JournalistRoute from "./components/JournalistRoute";
 
 
 function App() {
@@ -15,6 +26,16 @@ function App() {
                 {/* Public Routes */}
                 <Route path={"/"} element={<HomePage /> }/>
                 <Route path={"/login"} element={<Login /> }/>
+                <Route path="/profile" element={
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                } />
+                <Route path="/profile/edit" element={
+                    <ProtectedRoute>
+                        <ProfileEdit />
+                    </ProtectedRoute>
+                } />
                 <Route path="/articles" element={
                     <ProtectedRoute>
                         <Articles />
@@ -25,10 +46,25 @@ function App() {
                         <Article />
                     </ProtectedRoute>
                 } />
-                <Route path="/admin" element={
-                    <ProtectedRoute>
-                        <Admin />
-                    </ProtectedRoute>
+                <Route path="/writeArticle" element={
+                    <JournalistRoute>
+                        <CreateArticle />
+                    </JournalistRoute>
+                } />
+                <Route path="/users" element={
+                    <AdminRoute>
+                        <AdminUsersPage />
+                    </AdminRoute>
+                } />
+                <Route path="/references" element={
+                    <AdminRoute>
+                        <AdminReferencesPage />
+                    </AdminRoute>
+                } />
+                <Route path="/admin-articles" element={
+                    <AdminRoute>
+                        <AdminArticlesPage />
+                    </AdminRoute>
                 } />
             </Routes>
         </Router>

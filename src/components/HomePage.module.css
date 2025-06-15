@@ -17,7 +17,7 @@
 }
 
 .Articles {
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -75,7 +75,7 @@
 }
 
 .smallArticles {
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     display: flex;
     align-items: start;
     flex-direction: column;

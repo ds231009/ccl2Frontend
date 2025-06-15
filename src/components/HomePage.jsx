@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {useNavigate} from "react-router-dom";
 import * as apiService from "../services/apiService.js";
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
+
+import CurrentDate from "./ui/CurrentDate";
+import Header from "./ui/Header.jsx";
+import Footer from "./ui/Footer.jsx";
 import SmallArticleCard from "./ui/SmallArticle.jsx";
+import BigArticle from "./ui/BigArticle.jsx";
 
 import styles from "./HomePage.module.css";
-
 
 
 function HomePage() {
@@ -14,21 +16,47 @@ function HomePage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [user, setUser] = useState(null);
+
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchArticles = async () => {
-            try {
-                const data = await apiService.getHomeArticles();
-                setArticles(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const handleLogout = async () => {
+        await apiService.logout();
+        await fetchUser()
+        navigate('/');
+    }
 
+    const fetchArticles = async () => {
+        try {
+            const data = await apiService.getHomeArticles();
+            setArticles(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchUser = async () => {
+        try {
+            const res = await fetch("http://localhost:3000/auth/check-auth", {
+                credentials: "include", // Important to send cookies
+            });
+
+            if (!res.ok) throw new Error("Unauthorized");
+
+            const data = await res.json();
+            setUser(data.user); // { id, username, role }
+        } catch (err) {
+            console.error("Not logged in or token invalid", err);
+            setUser(null);
+        }
+    };
+
+    useEffect(() => {
         fetchArticles();
+
+        fetchUser();
     }, []);
 
     console.log(articles);
@@ -41,30 +69,41 @@ function HomePage() {
         <div>
             <main>
                 <div className={styles.header}>
-                    <div>NAV Ig</div>
+                    <CurrentDate/>
                     <div>LOGO</div>
-                    <div className={styles.buttons}>
-                        <button className="darkButton" onClick={() => navigate("/login", { state: { mode: "login" } })}>Log in</button>
-                        <button className="lightButton" onClick={() => navigate("/login", { state: { mode: "signup" } })}>Sign up</button>
+                    <div className="header-buttons">
+                        {!user || !user.role ? (
+                            <>
+                                <button onClick={() => navigate("/login")}>Login</button>
+                                <button onClick={() => navigate("/login", { state: { mode: "signup" } })} className="lightButton">Sign up</button>
+                            </>
+                        ) : (
+                            <>
+                                {user.role === "admin" && (
+                                    <>
+                                        <button className="adminButton" onClick={() => navigate("/users")}>Users</button>
+                                        <button className="adminButton" onClick={() => navigate("/references")}>References</button>
+                                        <button className="adminButton" onClick={() => navigate("/admin-articles")}>Articles</button>
+                                        |
+                                    </>
+                                )}
+                                {(user.role === "journalist" || user.role === "admin") && (
+                                    <>
+                                        <button onClick={() => navigate("/writeArticle")}>Write</button>
+                                        |
+                                    </>
+                                )}
+                                <button className="lightButton" onClick={() => navigate("/profile")}>Profile</button>
+                                <button className="darkButton" onClick={handleLogout}>Log out</button>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className={styles.Articles}>
-                    <div onClick={() => navigate("/articles/"+articles[0].id)} className={styles.firstArticle} loading="lazy">
-                        <div className={styles.FirstImageWrapper}>
-                            <img src={`http://localhost:3000/thumbnail/${articles[0].img_path}.jpg?width=960`} alt={articles[0].title} />
-                        </div>
-                        <div>
-                            <div>
-                                <h1>{articles[0].title}</h1>
-                                <div className={styles.Underline}></div>
-                            </div>
-                            <p>{new Intl.DateTimeFormat('de-DE').format(new Date(articles[0].timestamp))}</p>
-                        </div>
-                        <p>{articles[0].text.slice(0,300) + " [...]"}</p>
-                    </div>
+                    <BigArticle article={articles[0]}/>
                     <div className={styles.MidLine} />
                     <div className={styles.smallArticles}>
-                        {articles.map(article => (
+                        {articles.slice(1).map(article => (
                             <SmallArticleCard key={article.id} article={article} />
                         ))}
                     <button onClick={() => navigate("/articles?page=1")} className="darkButton">See more</button>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import * as apiService from "../services/apiService";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "./ui/Header.jsx";
+import Footer from "./ui/Footer.jsx";
 import SmallArticle from "./ui/SmallArticle";
 import Dropdown from "./ui/Dropdown.jsx";
 import styles from "./Articles.module.css";
