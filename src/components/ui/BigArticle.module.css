@@ -1,0 +1,78 @@
+.firstArticle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 85%;
+    margin: 30px auto;
+    gap: 16px;
+    transition: background 0.2s ease;
+}
+
+.FirstImageWrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eaeaea;
+    overflow: hidden;
+
+}
+
+.FirstImageWrapper > img {
+    align-self: center;
+    justify-self: center;
+}
+
+.Title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.Title h1 {
+    margin: 0;
+    font-size: 1.75rem;
+}
+
+.Underline {
+    width: 61.8%;
+    height: 4px;
+    background-color: var(--highlight-color, #f39c12);
+    margin-left: 15px;
+    transition: all 0.25s ease;
+}
+
+.firstArticle:hover .Underline {
+    background-color: var(--highlight-color2);
+    margin-left: 20px;
+    width: 75%;
+
+}
+
+.metaInfo {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.Text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+.summary {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.firstArticle h1, .firstArticle .FirstImageWrapper {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.firstArticle {
+    pointer-events: none;
+}

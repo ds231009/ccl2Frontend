@@ -1,0 +1,65 @@
+body {
+    background-color: var(--primary-color) !important;
+    color: var(--background) !important;
+}
+
+
+.View {
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Filters {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.Filters select {
+    margin-left: 5px;
+}
+
+.userTable {
+    width: 80%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.userTable th,
+.userTable td {
+    text-align: left;
+    height: 20px;
+}
+
+.userTable th {
+    font-weight: 600;
+    width: 240px
+}
+
+.userTable td {
+    border-top: 1px solid #ffffff;
+    padding: 6px 0;
+}
+
+.td {
+    padding-left: 15px;
+    border-top: none !important;
+}
+
+.input {
+    height: 30px;
+    padding: 0;
+    border: none;
+    outline: none;
+
+}
+
+
+
+.userTable input,
+.userTable select {
+    font-size: 14px;
+    box-sizing: border-box;
+}

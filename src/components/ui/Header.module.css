@@ -1,0 +1,17 @@
+.Articles {
+    /*width: calc(100cqw - max(40%,60px));*/
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 15px;
+    color: #1a1a1a;
+}
+
+.buttons {
+    padding-top: 28px;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
