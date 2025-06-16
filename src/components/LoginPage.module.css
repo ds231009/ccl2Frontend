@@ -1,7 +1,3 @@
-button {
-    transition: color 1.6s ease;
-}
-
 .FormCon {
     justify-self:  center;
     align-self: center;
@@ -22,18 +18,9 @@ button {
     cursor: pointer;
 }
 
-.Input {
-    width: 100%;
-    height: 40px;
-    margin: 0;
-    font-family: inherit;
-    font-size: 20px;
-    border: none;
-    border-radius: 5px;
-    background: var(--secondary-color);
-    color: var(--primary-color);
-    text-indent: 8px;
-}
+
+:global(body.light) .Input { background: var(--light-color-200); color: var(--dark-color-300); }
+:global(body.dark) .Input { background: var(--dark-color-200); color: var(--light-color-100); }
 
 .InputForm {
     width: 300px;

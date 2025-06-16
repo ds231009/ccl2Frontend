@@ -5,8 +5,6 @@ import Articles from "./components/Articles.jsx";
 import Article from "./components/Article.jsx";
 import Login from "./components/LoginPage.jsx";
 import Profile from "./components/ProfilePage.jsx";
-import ProfileEdit from "./components/ProfileEditPage.jsx";
-
 import CreateArticle from "./components/CreateArticle.jsx";
 
 
@@ -29,11 +27,6 @@ function App() {
                 <Route path="/profile" element={
                     <ProtectedRoute>
                         <Profile />
-                    </ProtectedRoute>
-                } />
-                <Route path="/profile/edit" element={
-                    <ProtectedRoute>
-                        <ProfileEdit />
                     </ProtectedRoute>
                 } />
                 <Route path="/articles" element={

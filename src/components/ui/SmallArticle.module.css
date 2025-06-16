@@ -10,7 +10,13 @@
     width: 90%;
     margin: 0 auto;
     height: 2px;
-    background-color: var(--light-color-500);
+    /*background-color: var(--dark-color-100);*/
+}
+:global(body.dark)  .SmallLine {
+    background-color: var(--dark-color-100);
+}
+:global(body.light) .SmallLine {
+    background-color: var(--light-color-300);
 }
 
 .smallArticleCon h2, .smallArticleCon p, .smallArticleCon .imageWrapper {
@@ -32,7 +38,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 1vh;
+    gap: 10px;
 }
 
 
@@ -44,7 +50,7 @@
 
 }
 .smallArticle:hover .Underline {
-    background-color: var(--highlight-color2);
+    background-color: var(--highlight-color-200);
     margin-left: 20px;
     width: 75%;
 
@@ -91,7 +97,9 @@
     padding: 2px 6px;
     min-width: 30px;
     text-align: center;
-    background-color: var(--light-color);
+    align-content: center;
+    background-color: var(--light-color-200);
+    color: var(--dark-color-100);
     border-radius: 2px;
 }
 

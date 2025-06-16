@@ -76,18 +76,6 @@ function ArticlesList() {
         navigate("/articles");
     };
 
-    const applyFilters = () => {
-        console.log("applyFilters");
-        const query = [];
-        if (selectedGames.length) query.push(`game=${selectedGames.join(",")}`);
-        if (selectedTeams.length) query.push(`team=${selectedTeams.join(",")}`);
-        if (selectedPlayers.length) query.push(`player=${selectedPlayers.join(",")}`);
-
-        navigate(`/articles?${query.join("&")}`);
-        setPage(1);
-        setArticles([]); // Clear existing articles
-    };
-
     const handleLoadMore = () => {
         console.log("handleLoadMore");
         const nextPage = page + 1;
@@ -155,7 +143,9 @@ function ArticlesList() {
                         labelKey="username"
                         valueKey="username"
                     />
-                    <button onClick={handleReset} className="darkButton">Reset</button>
+                    <div style={{marginTop: "20px"}}>
+                        <button onClick={handleReset} className="darkButton">Reset</button>
+                    </div>
                 </div>
                 {articles.map(article => (
                     <SmallArticle key={article.id} article={article} detailed />

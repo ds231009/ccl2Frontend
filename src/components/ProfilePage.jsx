@@ -3,6 +3,7 @@ import * as apiService from "../services/apiService";
 
 import Header from "./ui/Header.jsx";
 import Footer from "./ui/Footer.jsx";
+import styles from "./ProfilePage.module.css";
 
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
@@ -133,69 +134,101 @@ const ProfilePage = () => {
 
     return (
         <div>
-            <Header />
-            <h2>User Profile</h2>
+            <Header siteName={"My Profile"} />
+            <main>
+                <div>
+                    <dl>
+                        <div>
+                            <dt>First Name</dt>
+                            <dd>{user.first_name}</dd>
+                        </div>
+                        <div>
+                            <dt>Last Name</dt>
+                            <dd>{user.last_name}</dd>
+                        </div>
+                        <div>
+                            <dt>Username</dt>
+                            <dd>{user.username}</dd>
+                        </div>
+                        <div>
+                            <dt>Email</dt>
+                            <dd>{user.email}</dd>
+                        </div>
+                    </dl>
 
-            <div>
-                <p><strong>Username:</strong> {user.username}</p>
-                <p><strong>Email:</strong> {user.email}</p>
-                <p><strong>First Name:</strong> {user.first_name}</p>
-                <p><strong>Last Name:</strong> {user.last_name}</p>
-                <p><strong>Role:</strong> {user.role}</p>
-                <p><strong>Created:</strong> {user.creation_date ? new Date(user.creation_date).toLocaleDateString() : "N/A"}</p>
-            </div>
+                </div>
 
-            <div>
-                <button onClick={() => setEditInfo(!editInfo)}>{editInfo ? "Cancel Edit" : "Edit Info"}</button>
-                <button onClick={() => setEditPassword(!editPassword)}>{editPassword ? "Cancel Password" : "Change Password"}</button>
-            </div>
+                <div className="header-buttons">
+                    <button
+                        className={editInfo ? "lightButton" : "darkButton"}
+                        onClick={() => {
+                            setEditInfo(!editInfo);
+                            if (!editInfo) setEditPassword(false); // Close password if opening info
+                        }}
+                    >
+                        {editInfo ? "Cancel Edit" : "Edit Info"}
+                    </button>
 
-            {editInfo && (
-                <form onSubmit={handleInfoSubmit}>
-                    <h4>Edit Info</h4>
-                    <label>
-                        Username: <input name="username" value={infoForm.username} onChange={handleInfoChange} />
-                    </label><br />
-                    <label>
-                        Email: <input name="email" value={infoForm.email} onChange={handleInfoChange} />
-                    </label><br />
-                    <label>
-                        First Name: <input name="first_name" value={infoForm.first_name} onChange={handleInfoChange} />
-                    </label><br />
-                    <label>
-                        Last Name: <input name="last_name" value={infoForm.last_name} onChange={handleInfoChange} />
-                    </label><br />
-                    <button type="submit">Save Changes</button>
-                </form>
-            )}
+                    <button
+                        className={editPassword ? "lightButton" : "darkButton"}
+                        onClick={() => {
+                            setEditPassword(!editPassword);
+                            if (!editPassword) setEditInfo(false); // Close info if opening password
+                        }}
+                    >
+                        {editPassword ? "Cancel Password" : "Change Password"}
+                    </button>
+                </div>
+                {editInfo && (
+                    <div className={styles.FormCon}>
+                        <form onSubmit={handleInfoSubmit} className={styles.InputForm}>
+                            <h1>Edit Info</h1>
+                            <label>
+                                Username<input name="username" value={infoForm.username} onChange={handleInfoChange} />
+                            </label>
+                            <label>
+                                Email<input name="email" value={infoForm.email} onChange={handleInfoChange} />
+                            </label>
+                            <label className={styles.halfForm}>
+                                First Name<input name="first_name" value={infoForm.first_name} onChange={handleInfoChange} />
+                            </label>
+                            <label className={styles.halfForm}>
+                                Last Name<input name="last_name" value={infoForm.last_name} onChange={handleInfoChange} />
+                            </label>
+                            <button className="lightButton" type="submit">Save Changes</button>
+                        </form>
+                    </div>
+                )}
 
-            {editPassword && (
-                <form onSubmit={handlePasswordSubmit}>
-                    <h4>Change Password</h4>
-                    <label>
-                        Current Password:
-                        <input
-                            type="password"
-                            name="current"
-                            value={passwordForm.current}
-                            onChange={handlePasswordChange}
-                            required
-                        />
-                    </label><br />
-                    <label>
-                        New Password:
-                        <input
-                            type="password"
-                            name="new"
-                            value={passwordForm.new}
-                            onChange={handlePasswordChange}
-                            required
-                        />
-                    </label><br />
-                    <button type="submit">Update Password</button>
-                </form>
-
-            )}
+                {editPassword && (
+                    <div className={styles.FormCon}>
+                        <form onSubmit={handlePasswordSubmit} className={styles.InputForm}>
+                            <h1>Change Password</h1>
+                            <label>
+                                Current Password:
+                                <input
+                                    type="password"
+                                    name="current"
+                                    value={passwordForm.current}
+                                    onChange={handlePasswordChange}
+                                    required
+                                />
+                            </label>
+                            <label>
+                                New Password:
+                                <input
+                                    type="password"
+                                    name="new"
+                                    value={passwordForm.new}
+                                    onChange={handlePasswordChange}
+                                    required
+                                />
+                            </label>
+                            <button type="submit">Update Password</button>
+                        </form>
+                    </div>
+                )}
+            </main>
             <Footer />
         </div>
     );

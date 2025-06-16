@@ -67,38 +67,8 @@ function HomePage() {
 
     return (
         <div>
+            <Header mode="home"/>
             <main>
-                <div className={styles.header}>
-                    <CurrentDate/>
-                    <div>LOGO</div>
-                    <div className="header-buttons">
-                        {!user || !user.role ? (
-                            <>
-                                <button onClick={() => navigate("/login")}>Login</button>
-                                <button onClick={() => navigate("/login", { state: { mode: "signup" } })} className="lightButton">Sign up</button>
-                            </>
-                        ) : (
-                            <>
-                                {user.role === "admin" && (
-                                    <>
-                                        <button className="adminButton" onClick={() => navigate("/users")}>Users</button>
-                                        <button className="adminButton" onClick={() => navigate("/references")}>References</button>
-                                        <button className="adminButton" onClick={() => navigate("/admin-articles")}>Articles</button>
-                                        |
-                                    </>
-                                )}
-                                {(user.role === "journalist" || user.role === "admin") && (
-                                    <>
-                                        <button onClick={() => navigate("/writeArticle")}>Write</button>
-                                        |
-                                    </>
-                                )}
-                                <button className="lightButton" onClick={() => navigate("/profile")}>Profile</button>
-                                <button className="darkButton" onClick={handleLogout}>Log out</button>
-                            </>
-                        )}
-                    </div>
-                </div>
                 <div className={styles.Articles}>
                     <BigArticle article={articles[0]}/>
                     <div className={styles.MidLine} />
@@ -109,7 +79,7 @@ function HomePage() {
                     <button onClick={() => navigate("/articles?page=1")} className="darkButton">See more</button>
                     </div>
                 </div>
-            </main>w
+            </main>
             <Footer />
         </div>
     );

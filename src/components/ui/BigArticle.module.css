@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #eaeaea;
+    background-color: var(--light-color-500);
     overflow: hidden;
 
 }
@@ -54,7 +54,6 @@
 
 .metaInfo {
     font-size: 0.95rem;
-    color: #666;
 }
 
 .Text {
@@ -64,7 +63,6 @@
 }
 
 .summary {
-    color: #333;
     font-size: 1rem;
     line-height: 1.5;
 }
