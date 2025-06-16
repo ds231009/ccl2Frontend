@@ -1,9 +1,3 @@
-body {
-    background-color: var(--primary-color) !important;
-    color: var(--background) !important;
-}
-
-
 .View {
     padding: 40px 60px;
     display: flex;

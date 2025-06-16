@@ -18,9 +18,8 @@
     align-self: start;
 }
 
-.buttons {
-    padding-top: 28px;
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
+:global(body.dark) .Articles {
+}
+
+:global(body.light) .Articles {
 }

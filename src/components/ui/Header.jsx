@@ -9,6 +9,33 @@ function Header() {
     const navigate = useNavigate();
 
     const [user, setUser] = useState(null);
+    const [theme, setTheme] = useState('light');
+
+    function setCookie(name, value, days) {
+        const expires = new Date(Date.now() + days * 86400000).toUTCString();
+        document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+    }
+
+    function getCookie(name) {
+        const cookies = `; ${document.cookie}`;
+        const parts = cookies.split(`; ${name}=`);
+        return parts.length === 2 ? parts.pop().split(";").shift() : null;
+    }
+
+    useEffect(() => {
+        const saved = getCookie("theme") || "light";
+        setTheme(saved);
+        document.body.setAttribute("data-theme", saved);
+    }, []);
+
+    const toggleTheme = () => {
+        const next = theme === "light" ? "dark" : "light";
+        setTheme(next);
+        setCookie("theme", next, 30);
+        // document.body.setAttribute("data-theme", next);
+        document.body.classList.remove("light", "dark");
+        document.body.classList.add(next); // 'dark' or 'light'
+    };
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -41,6 +68,9 @@ function Header() {
         <header>
             <div>
                 <div onClick={() => navigate("/")}> LOGO STUFF</div>
+                <button onClick={toggleTheme}>
+                    Switch to {theme === "light" ? "Dark" : "Light"} Mode
+                </button>
                 <div className="header-buttons">
                     {user?.role === "admin" && (
                         <>
@@ -53,7 +83,7 @@ function Header() {
 
                     {user?.role === "journalist" || user?.role === "admin" && (
                         <>
-                            <button onClick={() => navigate("/writeArticle")}>Write</button>
+                            <button className="darkButton" onClick={() => navigate("/writeArticle")}>Write</button>
                             |
                         </>
                     )}

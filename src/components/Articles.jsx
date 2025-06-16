@@ -155,16 +155,13 @@ function ArticlesList() {
                         labelKey="username"
                         valueKey="username"
                     />
-                    <div className={styles.buttons}>
-                        {/*<button onClick={applyFilters} className="lightButton">Filter</button>*/}
-                        <button onClick={handleReset} className="darkButton">Reset</button>
-                    </div>
+                    <button onClick={handleReset} className="darkButton">Reset</button>
                 </div>
                 {articles.map(article => (
                     <SmallArticle key={article.id} article={article} detailed />
                 ))}
                 {hasMore && !loading && (
-                    <button onClick={handleLoadMore}>Load More</button>
+                    <button className="darkButton" onClick={handleLoadMore}>Load More</button>
                 )}
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}

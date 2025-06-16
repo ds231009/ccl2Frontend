@@ -109,7 +109,7 @@ function HomePage() {
                     <button onClick={() => navigate("/articles?page=1")} className="darkButton">See more</button>
                     </div>
                 </div>
-            </main>
+            </main>w
             <Footer />
         </div>
     );

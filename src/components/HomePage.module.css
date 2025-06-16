@@ -24,41 +24,6 @@
     gap: 5vh;
 }
 
-.firstArticle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 85%;
-    margin: 0 auto;
-    gap: 15px;
-}
-
-.firstArticle {
-    pointer-events: none;
-}
-
-
-.firstArticle > * {
-    pointer-events: auto;
-}
-
-.FirstImageWrapper {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #cccccc;
-    overflow: hidden;
-}
-
-.FirstImageWrapper > img {
-    width: 100%;
-    align-self: center;
-    justify-self: center;
-
-}
-
 
 .firstArticle > div {
     display: flex;
@@ -71,7 +36,7 @@
     width: 30%;
     margin: 0 auto;
     height: 2px;
-    background-color: var(--light-color);
+    background-color: var(--highlight-color-100);
 }
 
 .smallArticles {

@@ -18,6 +18,7 @@
             - 📌 Notes for tomorrow:
 
 ## Day Nr. 4 - 10.06.2025
+## Day Nr. 3 - 10.06.2025
             - ✅ What I worked on today: Articles MVP done. Get req. are working and some attempts to display that in the frontend.
             - 💡 Biggest learning: Having to figure out what/if every route needs a Controller. 
             - ❌ Biggest mistake/blocker: Getting to into frontend after just testing around while I should just do the desogns first and take them as given and not player around.
@@ -29,3 +30,16 @@
             - 💡 Biggest learning: Full time job and ccl is a pleasure
             - ❌ Biggest mistake/blocker: 
             - 📌 Notes for tomorrow: Implement other admin pages and nice styling. Maybe already the create article
+
+## Day Nr. 4 - 11.06.2025
+            - ✅ What I worked on today: Authentification fixed. Structure for Admin views definded. 
+            - 💡 Biggest learning: ChatGPT can't find all the problems not even with the code.
+            - ❌ Biggest mistake/blocker: CORS.USE() IS A WILDCARD THINGY.
+            - 📌 Notes for tomorrow: Implement authentification. How to admin or journalist roles.
+
+
+## Day Nr. 5 - 12.06.2025
+            - ✅ What I worked on today: 
+            - 💡 Biggest learning:  
+            - ❌ Biggest mistake/blocker:
+            - 📌 Notes for tomorrow: 

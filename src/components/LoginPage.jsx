@@ -8,7 +8,7 @@ function Login() {
     const location = useLocation();
     const [mode, setMode] = useState(location.state?.mode === 'signup' ? 'signup' : 'login');
 
-    const [email, setEmail] = useState('admin@admin.a');
+    const [email, setEmail] = useState('jul@admin.com');
     const [password, setPassword] = useState('admin');
     const [name, setName] = useState('Ad');
     const [lastName, setLastName] = useState('Min');
