@@ -77,10 +77,36 @@
 }
 
 .firstArticle h1, .firstArticle .FirstImageWrapper {
-    pointer-events: auto;
+    /*pointer-events: auto;*/
     /*cursor: pointer;*/
 }
 
 .firstArticle {
-    pointer-events: none;
+    /*pointer-events: none;*/
+}
+
+.likeIcon {
+    fill: var(--highlight-color-100);
+    fill-opacity: 0;
+    stroke: var(--highlight-color-100);
+    stroke-width: 10;
+    transition: fill-opacity 0.125s ease;
+    cursor: pointer;
+}
+
+.likeSvg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.125s ease;
+    cursor: pointer;
+}
+
+
+:global(.passive) .likeSvg:hover {
+    transform: scale(1.2);
+}
+
+:global(.active) path {
+    fill-opacity: 1;
+    background-color: var(--highlight-color-200);
 }

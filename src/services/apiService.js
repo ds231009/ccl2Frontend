@@ -211,16 +211,22 @@ export const getUserById = async (id) => {
     return await response.json();
 };
 
-export const postLike = async (userId, article_id) => {
-    console.log(userId, article_id);
-    // const response = await fetch(`${API_BASE_URL}/articles/:${article_id}/like`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     credentials: 'include',
-    //     body: JSON.stringify({userId, article_id}),
-    // });
+export const postLike = async (userId, articleId) => {
+    const response = await fetch(`${API_BASE_URL}/articles/interaction?articleId=${articleId}&userId=${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({userId, articleId}),
+    });
+}
+
+export const deleteLike = async (userId, articleId) => {
+    const response = await fetch(`${API_BASE_URL}/articles/interaction?articleId=${articleId}&userId=${userId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+    });
 }
 
 // Creates a new user (admin-level action or sign-up)
