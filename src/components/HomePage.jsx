@@ -39,9 +39,7 @@ function HomePage() {
 
     const fetchUser = async () => {
         try {
-            const res = await fetch("http://localhost:3000/auth/check-auth", {
-                credentials: "include", // Important to send cookies
-            });
+            const res = await apiService.checkAuth()
 
             if (!res.ok) throw new Error("Unauthorized");
 

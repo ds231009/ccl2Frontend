@@ -18,7 +18,7 @@
 .userTable {
     width: 80%;
     border-collapse: collapse;
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;;
 }
 
 .userTable th,
@@ -49,8 +49,6 @@
     outline: none;
 
 }
-
-
 
 .userTable input,
 .userTable select {

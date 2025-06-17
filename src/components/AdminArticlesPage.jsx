@@ -103,10 +103,8 @@ function AdminArticlesPage() {
 
     return (
         <>
-            <Header />
+            <Header siteName={"Admin Article Management"}/>
             <div className={styles.View}>
-                <h1>Admin Article Management</h1>
-
                 <div className={styles.Filters}>
                     <label>
                         Sort by:
@@ -212,7 +210,7 @@ function AdminArticlesPage() {
                                         </div>
                                     </td>
                                     <td className={styles.td}>
-                                        <button onClick={handleSaveClick}>Save</button>
+                                        <button className="lightButton" onClick={handleSaveClick}>Save</button>
                                         <button className="darkButton" onClick={handleCancelClick}>Cancel</button>
                                     </td>
                                 </>
@@ -226,7 +224,7 @@ function AdminArticlesPage() {
                                     <td>{article.teams?.join(", ")}</td>
                                     <td>{article.players?.join(", ")}</td>
                                     <td className={styles.td}>
-                                        <button onClick={() => handleEditClick(article)}>Edit</button>
+                                        <button className="lightButton" onClick={() => handleEditClick(article)}>Edit</button>
                                     </td>
                                 </>
                             )}

@@ -7,11 +7,9 @@ function Footer() {
 
     return (
         <footer>
-            <div>
-                <div onClick={() => navigate("/")}>Foot</div>
-                <div onClick={() => navigate("/")}>Foot</div>
-                <div onClick={() => navigate("/")}>Foot</div>
-            </div>
+            <div onClick={() => navigate("/")}>Foot</div>
+            <div onClick={() => navigate("/")}>Foot</div>
+            <div onClick={() => navigate("/")}>Foot</div>
         </footer>
     )}
 

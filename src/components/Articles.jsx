@@ -112,9 +112,8 @@ function ArticlesList() {
 
     return (
         <div>
-            <Header />
+            <Header siteName={"Articles"} />
             <main className={styles.Articles}>
-                <h1>Articles</h1>
                 <div className={styles.Filters}>
                     <Dropdown
                         label="Games"

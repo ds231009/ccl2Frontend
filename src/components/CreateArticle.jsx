@@ -3,7 +3,7 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 import Footer from "./ui/Footer.jsx";
 import Header from "./ui/Header.jsx";
 import * as apiService from "../services/apiService";
-import styles from "./Article.module.css";
+import styles from "./CreateArticle.module.css";
 import Dropdown from "./ui/Dropdown.jsx";
 
 function ArticlePage() {
@@ -94,10 +94,10 @@ function ArticlePage() {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className="article-container">
-            <Header />
+        <>
+            <Header siteName={"Publish"} />
             <main>
-                <form onSubmit={handleSave}>
+                <div className={styles.Filters}>
                     <Dropdown
                         label="Authors"
                         options={authors}
@@ -134,32 +134,27 @@ function ArticlePage() {
                         labelKey="username"
                         valueKey="id"
                     />
-                    <input className={styles.Input}
+                </div>
+                <form className="InputForm" onSubmit={handleSave} style={{width: "70%"}}>
+                    <input
                            placeholder="title"
                            type="text"
                            value={title}
                            onChange={(e) => setTitle(e.target.value)}
                            required
                     />
-                    <input className={styles.Input}
+                    <textarea style={{width: "100%", minHeight: "fit-content"}}
                            placeholder="text"
-                           type="text"
                            value={text}
                            onChange={(e) => setText(e.target.value)}
                            required
                     />
-                    <input className={styles.Input}
-                           placeholder="img_path"
-                           type="text"
-                           value={img_path}
-                           onChange={(e) => setImgPath(e.target.value)}
-                           required
-                    />
-                    <button  type="submit" className="darkButton"></button>
+
+                    <button className="lightButton" type="submit">Publish</button>
                 </form>
             </main>
             <Footer />
-        </div>
+        </>
     );
 }
 

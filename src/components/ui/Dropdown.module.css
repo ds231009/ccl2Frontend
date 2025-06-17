@@ -27,6 +27,15 @@ select {
     margin-bottom: 5px;
 }
 
+:global(body.dark) select {
+    background-color: var(--dark-color-200);
+    color: var(--light-color-500);
+}
+
+:global(body.light) select {
+    background-color: var(--light-color-200);
+    color: var(--dark-color-100);
+}
 
 .ItemCon {
     height: 30px;
@@ -47,8 +56,6 @@ select:hover {
     min-width: 30px;
     text-align: center;
     align-content: center;
-    background-color: var(--light-color-300);
-    color: var(--dark-color-100);
     border-radius: 2px;
     transition: all 0.2s ease;
 }
@@ -56,4 +63,14 @@ select:hover {
 .ItemBox:hover {
     background-color: var(--light-color-500);
     cursor: pointer;
+}
+
+:global(body.dark) .ItemBox {
+    background-color: var(--dark-color-200);
+    color: var(--light-color-500);
+}
+
+:global(body.light) .ItemBox {
+    background-color: var(--light-color-200);
+    color: var(--dark-color-100);
 }

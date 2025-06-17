@@ -17,9 +17,3 @@
     transition: all 0.5s ease;
     align-self: start;
 }
-
-:global(body.dark) .Articles {
-}
-
-:global(body.light) .Articles {
-}

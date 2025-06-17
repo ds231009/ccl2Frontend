@@ -18,19 +18,6 @@
     cursor: pointer;
 }
 
-
-:global(body.light) .Input { background: var(--light-color-200); color: var(--dark-color-300); }
-:global(body.dark) .Input { background: var(--dark-color-200); color: var(--light-color-100); }
-
-.InputForm {
-    width: 300px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
 .halfForm {
     width: 47%;
 }

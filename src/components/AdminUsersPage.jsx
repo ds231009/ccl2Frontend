@@ -93,10 +93,8 @@ function AdminUsersPage() {
 
     return (
         <>
-            <Header/>
+            <Header siteName={"Admin User Management"}/>
             <div className={styles.View}>
-                <h1>Admin User Management</h1>
-
                 <div className={styles.Filters}>
                     <label>
                         Filter by Role:
@@ -142,10 +140,10 @@ function AdminUsersPage() {
                         <tr key={user.id}>
                             {editUserId === user.id ? (
                                 <>
-                                    <td><input className={styles.input} name="username" value={editFormData.username} onChange={handleInputChange} /></td>
-                                    <td><input className={styles.input}  name="first_name" value={editFormData.first_name} onChange={handleInputChange} /></td>
-                                    <td><input className={styles.input}  name="last_name" value={editFormData.last_name} onChange={handleInputChange} /></td>
-                                    <td><input className={styles.input}  name="email" value={editFormData.email} onChange={handleInputChange} /></td>
+                                    <td><input name="username" value={editFormData.username} onChange={handleInputChange} /></td>
+                                    <td><input  name="first_name" value={editFormData.first_name} onChange={handleInputChange} /></td>
+                                    <td><input  name="last_name" value={editFormData.last_name} onChange={handleInputChange} /></td>
+                                    <td><input  name="email" value={editFormData.email} onChange={handleInputChange} /></td>
                                     <td>
                                         <select name="role" value={editFormData.role} onChange={handleInputChange}>
                                             <option value="user">User</option>
@@ -154,7 +152,7 @@ function AdminUsersPage() {
                                         </select>
                                     </td>
                                     <td className={styles.td}>
-                                        <button onClick={handleSaveClick}>Save</button>
+                                        <button className="lightButton" onClick={handleSaveClick}>Save</button>
                                         <button className="darkButton" onClick={handleCancelClick}>Cancel</button>
                                     </td>
                                 </>
@@ -165,7 +163,7 @@ function AdminUsersPage() {
                                     <td>{user.last_name}</td>
                                     <td>{user.email}</td>
                                     <td>{user.role}</td>
-                                    <td className={styles.td}><button onClick={() => handleEditClick(user)}>Edit</button></td>
+                                    <td className={styles.td}><button className="darkButton" onClick={() => handleEditClick(user)}>Edit</button></td>
                                 </>
                             )}
                         </tr>

@@ -37,8 +37,8 @@ function ArticlePage() {
     if (!article) return <p>No article found.</p>;
 
     return (
-        <div className="article-container">
-            <Header />
+        <div>
+            < Header/>
             <main>
                 <div className={styles.Articles}>
                     <div onClick={() => navigate("/articles")} className={styles.GoBack}>🠈 Go back</div>

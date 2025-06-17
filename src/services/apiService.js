@@ -1,11 +1,12 @@
 const API_BASE_URL = 'http://localhost:3000';
 
-export const login = async (email, password) => { // Login
+// Logs in a user with email and password
+export const login = async (email, password) => {
     console.log(email, password);
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include', // Include cookies in request
+        credentials: 'include',
         body: JSON.stringify({ email, password })
     });
 
@@ -16,17 +17,27 @@ export const login = async (email, password) => { // Login
     return await response.json();
 };
 
+// Registers a new user with provided userData
 export const signup = async (userData) => {
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include', // Include cookies in request
+        credentials: 'include',
         body: JSON.stringify(userData),
     });
     if (!response.ok) throw new Error('Sign up failed');
     return response.json();
 };
 
+export const checkAuth = async () => {
+    const response =fetch(`${API_BASE_URL}/auth/check-auth`, {
+        credentials: "include",
+    });
+    if (!response.ok) throw new Error('Auth failed');
+    return response.json();
+};
+
+// Logs out the currently authenticated user
 export const logout = async () => {
     const response = await fetch(`${API_BASE_URL}/auth/logout`, {
         method: 'GET',
@@ -35,8 +46,9 @@ export const logout = async () => {
     return response.ok;
 };
 
-// Articles
+// --------- Articles ---------
 
+// Fetches articles based on optional filter parameters
 export const getArticles = async (filters = {}) => {
     // Convert array values to comma-separated strings and remove null/undefined
     const validFilters = Object.fromEntries(
@@ -46,22 +58,22 @@ export const getArticles = async (filters = {}) => {
     );
 
     const query = new URLSearchParams(validFilters).toString();
-    const url = `http://localhost:3000/articles${query ? `?${query}` : ""}`;
+    const url = `${API_BASE_URL}/articles${query ? `?${query}` : ""}`;
     console.log("Fetching:", url);
 
     const response = await fetch(url, {
-        credentials: 'include', // Include cookies
+        credentials: 'include',
     });
     if (!response.ok) throw new Error("Network response was not ok");
 
     return await response.json();
 };
 
-
+// Fetches articles for the homepage
 export const getHomeArticles = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/`, {
-            credentials: 'include', // Include cookies
+        const response = await fetch(`${API_BASE_URL}`, {
+            credentials: 'include',
         });
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
@@ -72,11 +84,13 @@ export const getHomeArticles = async () => {
     }
 };
 
+// Fetches a single article by its ID
 export const getArticle = async (id) => {
     try {
-        const response = await fetch(`http://localhost:3000/articles/${id}`, {
-            credentials: 'include', // Include cookies
+        const response = await fetch(`${API_BASE_URL}/articles/${id}`, {
+            credentials: 'include',
         });
+
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         return data;
@@ -86,13 +100,14 @@ export const getArticle = async (id) => {
     }
 };
 
+// Updates an existing article by ID (Note: Should use PUT or PATCH instead of POST for updates)
 export const updateArticle = async (id, articleData) => {
     const response = await fetch(`${API_BASE_URL}/articles/${id}`, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        credentials: 'include', // Include cookies (no token parameter needed)
+        credentials: 'include',
         body: JSON.stringify({id, articleData}),
     });
 
@@ -103,7 +118,8 @@ export const updateArticle = async (id, articleData) => {
     return await response.json();
 };
 
-export const createArticle = async (articleData) => { // Creates new user
+// Creates a new article with the given data
+export const createArticle = async (articleData) => {
     const response = await fetch(`${API_BASE_URL}/articles/new`, {
         method: 'POST',
         headers: {
@@ -121,46 +137,50 @@ export const createArticle = async (articleData) => { // Creates new user
     return await response.json();
 };
 
-// References
+// --------- References ---------
 
+// Fetches list of all games from references
 export const getGames = async () => {
-    const url = `http://localhost:3000/references/games`;
+    const url = `${API_BASE_URL}/references/games`;
     console.log("Fetching:", url);
 
     const response = await fetch(url, {
-        credentials: 'include', // Include cookies
+        credentials: 'include',
     });
     if (!response.ok) throw new Error("Network response was not ok");
 
     return await response.json();
 };
 
+// Fetches list of all teams from references
 export const getTeams = async () => {
-    const url = `http://localhost:3000/references/teams`;
+    const url = `${API_BASE_URL}/references/teams`;
     console.log("Fetching:", url);
 
     const response = await fetch(url, {
-        credentials: 'include', // Include cookies
+        credentials: 'include',
     });
     if (!response.ok) throw new Error("Network response was not ok");
 
     return await response.json();
 };
 
+// Fetches list of all players from references
 export const getPlayers = async () => {
-    const url = `http://localhost:3000/references/players`;
+    const url = `${API_BASE_URL}/references/players`;
     console.log("Fetching:", url);
 
     const response = await fetch(url, {
-        credentials: 'include', // Include cookies
+        credentials: 'include',
     });
     if (!response.ok) throw new Error("Network response was not ok");
 
     return await response.json();
 };
 
-// Users
+// --------- Users ---------
 
+// Fetches all users
 export const getUsers = async () => { // Fetches User Data
     try {
         const response = await fetch(`${API_BASE_URL}/users`, {
@@ -178,7 +198,8 @@ export const getUsers = async () => { // Fetches User Data
     }
 };
 
-export const getUserById = async (id) => { // Fetch specific user by id
+// Fetches a specific user by their ID
+export const getUserById = async (id) => {
     const response = await fetch(`${API_BASE_URL}/users/${id}`, {
         credentials: 'include', // Include cookies (no Authorization header needed)
     });
@@ -190,6 +211,8 @@ export const getUserById = async (id) => { // Fetch specific user by id
     return await response.json();
 };
 
+
+// Creates a new user (admin-level action or sign-up)
 export const createUser = async (userData) => { // Creates new user
     const response = await fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
@@ -208,6 +231,7 @@ export const createUser = async (userData) => { // Creates new user
     return await response.json();
 };
 
+// Updates an existing user by ID (Note: body structure nests userData, could be simplified)
 export const updateUser = async (id, userData) => {
     const response = await fetch(`${API_BASE_URL}/users/${id}`, {
         method: 'PUT',
@@ -225,6 +249,7 @@ export const updateUser = async (id, userData) => {
     return await response.json();
 };
 
+// Deletes a user by ID
 export const deleteUser = async (id) => {
     const response = await fetch(`${API_BASE_URL}/users/${id}`, {
         method: 'DELETE',

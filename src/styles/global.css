@@ -27,60 +27,98 @@ body {
     transition: all 0.25s ease;
 }
 
-
-
 #root {
     width: 100%;
-    min-height: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
 header {
     width: 100%;
-    height: 60px;
+    min-height: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-body.light header {
-    background: var(--light-color-300);
-}
-body.dark header {
-    background: var(--dark-color-200);
-}
-
+body.light header {background: var(--light-color-300)}
+body.dark header {background: var(--dark-color-200)}
 
 header > div {
     width: 90%;
-    height: 60px;
-    display: flex;
+    min-height: 60px;
+    display: grid;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+header > div > .column {
+    flex: 1 1 30%;
+    min-width: 0;
+    word-wrap: break-word;
 }
 
 .header-buttons {
+    max-width: 100%;
+    padding: 8px 0;
+    justify-self: flex-end;
+    width: fit-content;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 5px;
 }
 
-body.light footer {
-    background: var(--light-color-200);
+footer {
+    width: 100%;
+    height: 60px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
 }
-body.dark footer {
-    background: var(--dark-color-100);
+
+footer > * {
+    align-self: center;
+    justify-self: center;
 }
+
+body.light footer { background: var(--light-color-200);}
+body.dark footer { background: var(--dark-color-100);}
 
 
 main {
-    width: 100%;
+    flex: 1;
     padding: 45px 0;
     margin: 0;
+    gap: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.switchButton {
+    min-width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+}
+.switchButton:hover {
+    min-width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+}
+
+body.light .switchButton {background: var(--light-color-100); color: var(--highlight-color-100); }
+body.light .switchButton:hover {background: var(--highlight-color-100); color: var(--light-color-500); }
+body.dark .switchButton {background: var(--dark-color-300); color: var(--highlight-color-200); }
+body.dark .switchButton:hover {background: var(--dark-color-100)}
+
+
 
 button {
     min-width: 90px;
@@ -101,6 +139,7 @@ button:hover {
     min-width: 95px;
     padding: 4px 16px
 }
+
 
 body.light .lightButton {background: var(--highlight-color-100); color: var(--light-color-100); }
 body.light .lightButton:hover {background: var(--highlight-color-200)}
@@ -124,7 +163,7 @@ body.light .adminButton:hover {
     color: var(--dark-color-100);
 }
 body.dark .adminButton  {
-    background: var(--dark-color-200);
+    background: var(--dark-color-300);
     border: 2px solid  var(--highlight-color-100);
     color: var(--light-color-200);
 }
@@ -163,6 +202,10 @@ body.light {
     color: var(--dark-color-100);
 }
 
+body.light input, body.light textarea { background: var(--light-color-200); color: var(--dark-color-300); }
+body.dark input, body.dark textarea { background: var(--dark-color-200); color: var(--light-color-100); }
+
+
 dl {
     display: grid;
     grid-template-columns: max-content 1fr;
@@ -176,7 +219,7 @@ dd {
     margin: 0;
 }
 
-input {
+input, textarea {
     width: 100%;
     height: 40px;
     margin: 0;
@@ -194,17 +237,19 @@ input {
     transition: fill 0.3s ease;
 }
 
-body.light .logo {
-    fill: var(--dark-color-200);
-}
-
-body.dark .logo {
-    fill: var(--light-color-100);
-}
 
 .logo-container {
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.InputForm {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }

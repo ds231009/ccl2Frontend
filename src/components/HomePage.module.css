@@ -1,5 +1,5 @@
 .header {
-    width: 70%;
+    width: 80%;
     height: 90px;
     padding-bottom: 15px;
     display: grid;
@@ -17,7 +17,7 @@
 }
 
 .Articles {
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;

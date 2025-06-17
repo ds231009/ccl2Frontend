@@ -45,6 +45,7 @@ function Header({ mode = "other", siteName = "" }) {
                 });
                 if (!res.ok) throw new Error("Unauthorized");
                 const data = await res.json();
+                console.log(data);
                 setUser(data.user);
             } catch (err) {
                 setUser(null);
@@ -56,6 +57,7 @@ function Header({ mode = "other", siteName = "" }) {
     const handleLogout = async () => {
         await apiService.logout();
         navigate("/");
+        setUser(null);
     };
 
     return (
@@ -71,7 +73,7 @@ function Header({ mode = "other", siteName = "" }) {
 
                 }
                 {mode === 'home' ?
-                    <Logo /> : <></>
+                    <Logo /> : <div></div>
                 }
                 <div className="header-buttons">
                     {!user || !user.role ? (
@@ -86,11 +88,11 @@ function Header({ mode = "other", siteName = "" }) {
                         </>
                     ) : (
                         <>
+                            <button className={"switchButton"} onClick={toggleTheme}>
+                                {theme === "light" ? "☾" : "☀"}
+                            </button>
                             {user.role === "admin" && (
                                 <>
-                                    <button className="darkButton" onClick={toggleTheme}>
-                                        Switch to {theme === "light" ? "Dark" : "Light"} Mode
-                                    </button>
                                     <button className="adminButton" onClick={() => navigate("/users")}>
                                         Users
                                     </button>

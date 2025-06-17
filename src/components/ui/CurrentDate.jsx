@@ -5,7 +5,7 @@ function CurrentDate() {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString(undefined, options);
 
-    return <h3>{formattedDate}</h3>;
+    return <h5>{formattedDate}</h5>;
 }
 
 export default CurrentDate;

@@ -53,24 +53,24 @@ function Login() {
             <div className={styles.FormCon}>
                 <h1>{mode === 'signup' ? 'Sign Up' : 'Log In'}</h1>
                 {error && <p className="error-message">{error}</p>}
-                <form onSubmit={handleSubmit} className={styles.InputForm}>
+                <form onSubmit={handleSubmit} className="InputForm">
                     {mode === 'signup' && (
                         <>
-                            <input className={styles.Input}
+                            <input className={"Input"}
                                 placeholder="Username"
                                 type="text"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
-                            <input className={`${styles.Input} ${styles.halfForm}`}
+                            <input className={`Input ${styles.halfForm}`}
                                    placeholder="First Name"
                                    type="text"
                                    value={name}
                                    onChange={(e) => setName(e.target.value)}
                                    required
                             />
-                            <input className={`${styles.Input} ${styles.halfForm}`}
+                            <input className={`Input ${styles.halfForm}`}
                                placeholder="Last Name"
                                type="text"
                                value={lastName}
@@ -79,14 +79,14 @@ function Login() {
                             />
                         </>
                     )}
-                    <input className={styles.Input}
+                    <input className={"Input"}
                         placeholder="Email"
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <input className={styles.Input}
+                    <input className={"Input"}
                         placeholder="Password"
                         type="password"
                         value={password}

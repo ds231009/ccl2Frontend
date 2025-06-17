@@ -93,10 +93,8 @@ function AdminUsersPage() {
 
     return (
         <>
-            <Header/>
+            <Header siteName={"Admin Reference Management"}/>
             <div className={styles.View}>
-                <h1>Admin User Management</h1>
-
                 <div className={styles.Filters}>
                     <label>
                         Filter by Role:

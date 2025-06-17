@@ -98,9 +98,18 @@
     min-width: 30px;
     text-align: center;
     align-content: center;
+
+    border-radius: 2px;
+}
+
+:global(body.dark) .ItemBox {
+    background-color: var(--dark-color-200);
+    color: var(--light-color-500);
+}
+
+:global(body.light) .ItemBox {
     background-color: var(--light-color-200);
     color: var(--dark-color-100);
-    border-radius: 2px;
 }
 
 @media (max-width: 950px) {

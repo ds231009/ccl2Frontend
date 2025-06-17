@@ -1,0 +1,9 @@
+:global(body.dark) .logo {
+    /*background-color: var(--dark-color-200);*/
+    fill: var(--light-color-200);
+}
+
+:global(body.light) .logo {
+    /*background-color: var(--light-color-200);*/
+    fill: var(--dark-color-300);
+}
