@@ -29,6 +29,7 @@ function HomePage() {
     const fetchArticles = async () => {
         try {
             const data = await apiService.getHomeArticles();
+            console.log(data);
             setArticles(data);
         } catch (err) {
             setError(err.message);
@@ -64,7 +65,7 @@ function HomePage() {
     if (!articles || articles.length === 0) return <p>No article found.</p>;
 
     return (
-        <div>
+        <>
             <Header mode="home"/>
             <main>
                 <div className={styles.Articles}>
@@ -79,7 +80,7 @@ function HomePage() {
                 </div>
             </main>
             <Footer />
-        </div>
+        </>
     );
 }
 

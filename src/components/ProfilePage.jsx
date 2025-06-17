@@ -133,7 +133,7 @@ const ProfilePage = () => {
     if (!user) return <p>Loading profile...</p>;
 
     return (
-        <div style={{minHeight: "100vh"}}>
+        <>
             <Header siteName={"My Profile"} />
             <main>
                 <div>
@@ -230,7 +230,7 @@ const ProfilePage = () => {
                 )}
             </main>
             <Footer />
-        </div>
+        </>
     );
 };
 

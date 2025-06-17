@@ -49,7 +49,7 @@ function Login() {
     };
 
     return (
-        <div className={styles.Form}>
+        <>
             <div className={styles.FormCon}>
                 <h1>{mode === 'signup' ? 'Sign Up' : 'Log In'}</h1>
                 {error && <p className="error-message">{error}</p>}
@@ -105,7 +105,7 @@ function Login() {
                     </div>
                 </form>
             </div>
-        </div>
+        </>
     );
 }
 

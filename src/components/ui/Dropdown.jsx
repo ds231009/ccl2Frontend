@@ -19,7 +19,8 @@ function Dropdown({
             <label>{label}</label>
             <select onChange={(e) => {
                 if (e.target.value) {
-                    onAdd(e.target.value);
+                    onAdd(isNaN(e.target.value) ? e.target.value : Number(e.target.value));
+
                     e.target.value = "";
                 }
             }}>
@@ -32,7 +33,7 @@ function Dropdown({
             </select>
             <div className={styles.ItemCon}>
                 {selected.map((val, i) => {
-                    const fullLabel = options.find(opt => opt[valueKey] === val)?.[labelKey] ?? val;
+                    const fullLabel = options.find(opt => String(opt[valueKey]) === String(val))?.[labelKey] ?? val;
                     return (
                         <div key={i} className={styles.ItemBox} onClick={() => onRemove(val)}>
                             {fullLabel} &times;

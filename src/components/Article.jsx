@@ -37,7 +37,7 @@ function ArticlePage() {
     if (!article) return <p>No article found.</p>;
 
     return (
-        <div>
+        <>
             < Header/>
             <main>
                 <div className={styles.Articles}>
@@ -46,7 +46,7 @@ function ArticlePage() {
                 </div>
             </main>
             <Footer />
-        </div>
+        </>
     );
 }
 

@@ -6,13 +6,12 @@ import * as apiService from "../services/apiService";
 import styles from "./CreateArticle.module.css";
 import Dropdown from "./ui/Dropdown.jsx";
 
-function ArticlePage() {
+function CreateArticle() {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
-    const [img_path, setImgPath] = useState("");
+    const [userId, setUserId] = useState(null);
 
     const navigate = useNavigate();
-
     const [searchParams] = useSearchParams();
 
     const initialPlayer = searchParams.get("player")?.split(",") ?? [];
@@ -58,13 +57,29 @@ function ArticlePage() {
                 setGames(gamesData);
                 setTeams(teamsData);
                 setPlayers(playersData);
-                setAuthors(authorsData);
+                setAuthors(authorsData.filter(user => user.role === 'journalist' || user.role === 'admin'));
             } catch (err) {
                 console.error("Failed to load filter options", err);
             }
         };
 
         fetchFilters();
+    }, []);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const data = await apiService.checkAuth();
+                const userId = data.user.id;
+
+                setSelectedAuthors(prevAuthors => (
+                    prevAuthors.includes(userId) ? prevAuthors : [...prevAuthors, userId]
+                ));
+            } catch (err) {
+                setError(err.message);
+            }
+        };
+        fetchUser();
     }, []);
 
 
@@ -91,12 +106,14 @@ function ArticlePage() {
         }
     }
 
+
     if (error) return <p>Error: {error}</p>;
 
     return (
         <>
             <Header siteName={"Publish"} />
             <main>
+                <h2>Add Co-Authors or References</h2>
                 <div className={styles.Filters}>
                     <Dropdown
                         label="Authors"
@@ -143,7 +160,7 @@ function ArticlePage() {
                            onChange={(e) => setTitle(e.target.value)}
                            required
                     />
-                    <textarea style={{width: "100%", minHeight: "fit-content"}}
+                    <textarea style={{width: "100%", minHeight: "120px"}}
                            placeholder="text"
                            value={text}
                            onChange={(e) => setText(e.target.value)}
@@ -158,4 +175,4 @@ function ArticlePage() {
     );
 }
 
-export default ArticlePage;
+export default CreateArticle;

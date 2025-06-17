@@ -41,12 +41,14 @@ function ArticlesList() {
                 team: selectedTeams,
                 game: selectedGames,
                 page: currentPage,
+                size: 5
             });
 
-            console.log(data)
+            console.log("DATA",data)
 
             setArticles(prev => reset ? data : [...prev, ...data]);
-            setHasMore(data ?? data.length > 0);
+            setHasMore(data.length === 5); // assuming `size: 5` is your page size
+            console.log("HAS MORE",hasMore, data ?? data.length > 0);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -111,7 +113,7 @@ function ArticlesList() {
     }, [fetchArticles]);
 
     return (
-        <div>
+        <>
             <Header siteName={"Articles"} />
             <main className={styles.Articles}>
                 <div className={styles.Filters}>
@@ -156,7 +158,7 @@ function ArticlesList() {
                 {error && <p>Error: {error}</p>}
             </main>
             <Footer />
-        </div>
+        </>
     );
 }
 

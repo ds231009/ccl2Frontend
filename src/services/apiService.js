@@ -30,7 +30,7 @@ export const signup = async (userData) => {
 };
 
 export const checkAuth = async () => {
-    const response =fetch(`${API_BASE_URL}/auth/check-auth`, {
+    const response = await fetch(`${API_BASE_URL}/auth/check-auth`, {
         credentials: "include",
     });
     if (!response.ok) throw new Error('Auth failed');

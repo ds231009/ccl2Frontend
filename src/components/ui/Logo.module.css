@@ -1,9 +1,15 @@
-:global(body.dark) .logo {
-    /*background-color: var(--dark-color-200);*/
-    fill: var(--light-color-200);
-}
+/*:global(body.dark) .logo {*/
+/*    fill: var(--light-color-200);*/
+/*}*/
 
-:global(body.light) .logo {
-    /*background-color: var(--light-color-200);*/
-    fill: var(--dark-color-300);
-}
+/*:global(body.light) .logo {*/
+/*    fill: var(--dark-color-300);*/
+/*}*/
+
+:global(body.dark) .part1 {fill: var(--light-color-200);}
+
+:global(body.light) .part1 {fill: var(--dark-color-300);}
+
+:global(body.dark) .part2 {fill: var(--highlight-color-200);}
+
+:global(body.light) .part2 {fill: var(--highlight-color-200);}

@@ -40,11 +40,7 @@ function Header({ mode = "other", siteName = "" }) {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch("http://localhost:3000/auth/check-auth", {
-                    credentials: "include",
-                });
-                if (!res.ok) throw new Error("Unauthorized");
-                const data = await res.json();
+                const data = await apiService.checkAuth();
                 console.log(data);
                 setUser(data.user);
             } catch (err) {
@@ -66,7 +62,7 @@ function Header({ mode = "other", siteName = "" }) {
                 {mode === 'home' ?
                     <CurrentDate />
                     :
-                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "10px"}}>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "20px"}}>
                         <Logo />
                         <h2>{siteName}</h2>
                     </div>
