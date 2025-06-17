@@ -50,7 +50,7 @@ body.dark header {
 
 header > div {
     width: 90%;
-    height: 90px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -188,3 +188,23 @@ input {
     text-indent: 8px;
 }
 
+.logo {
+    height: auto;
+    fill: var(--light-color-100); /* default fill color */
+    transition: fill 0.3s ease;
+}
+
+body.light .logo {
+    fill: var(--dark-color-200);
+}
+
+body.dark .logo {
+    fill: var(--light-color-100);
+}
+
+.logo-container {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

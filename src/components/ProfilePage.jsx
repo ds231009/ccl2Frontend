@@ -3,7 +3,7 @@ import * as apiService from "../services/apiService";
 
 import Header from "./ui/Header.jsx";
 import Footer from "./ui/Footer.jsx";
-import styles from "./ProfilePage.module.css";
+// import styles from "./ProfilePage.module.css";
 
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
@@ -180,8 +180,8 @@ const ProfilePage = () => {
                     </button>
                 </div>
                 {editInfo && (
-                    <div className={styles.FormCon}>
-                        <form onSubmit={handleInfoSubmit} className={styles.InputForm}>
+                    <div className="FormCon">
+                        <form onSubmit={handleInfoSubmit} className="InputForm">
                             <h1>Edit Info</h1>
                             <label>
                                 Username<input name="username" value={infoForm.username} onChange={handleInfoChange} />
@@ -189,10 +189,10 @@ const ProfilePage = () => {
                             <label>
                                 Email<input name="email" value={infoForm.email} onChange={handleInfoChange} />
                             </label>
-                            <label className={styles.halfForm}>
+                            <label className="halfForm">
                                 First Name<input name="first_name" value={infoForm.first_name} onChange={handleInfoChange} />
                             </label>
-                            <label className={styles.halfForm}>
+                            <label className="halfForm">
                                 Last Name<input name="last_name" value={infoForm.last_name} onChange={handleInfoChange} />
                             </label>
                             <button className="lightButton" type="submit">Save Changes</button>
@@ -201,8 +201,8 @@ const ProfilePage = () => {
                 )}
 
                 {editPassword && (
-                    <div className={styles.FormCon}>
-                        <form onSubmit={handlePasswordSubmit} className={styles.InputForm}>
+                    <div className="FormCon">
+                        <form onSubmit={handlePasswordSubmit} className="InputForm">
                             <h1>Change Password</h1>
                             <label>
                                 Current Password:
