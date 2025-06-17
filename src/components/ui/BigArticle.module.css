@@ -26,6 +26,15 @@
     justify-self: center;
 }
 
+.Header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
 .Title {
     display: flex;
     flex-direction: column;
@@ -69,7 +78,7 @@
 
 .firstArticle h1, .firstArticle .FirstImageWrapper {
     pointer-events: auto;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .firstArticle {

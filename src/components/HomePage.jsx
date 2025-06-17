@@ -69,7 +69,7 @@ function HomePage() {
             <Header mode="home"/>
             <main>
                 <div className={styles.Articles}>
-                    <BigArticle article={articles[0]}/>
+                    <BigArticle article={articles[0]} />
                     <div className={styles.MidLine} />
                     <div className={styles.smallArticles}>
                         {articles.slice(1).map(article => (

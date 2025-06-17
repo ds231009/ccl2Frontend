@@ -42,7 +42,7 @@ function ArticlePage() {
             <main>
                 <div className={styles.Articles}>
                     <div onClick={() => navigate("/articles")} className={styles.GoBack}>🠈 Go back</div>
-                    <BigArticle article={article}/>
+                    <BigArticle article={article} detailed={true}/>
                 </div>
             </main>
             <Footer />

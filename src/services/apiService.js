@@ -211,6 +211,17 @@ export const getUserById = async (id) => {
     return await response.json();
 };
 
+export const postLike = async (userId, article_id) => {
+    console.log(userId, article_id);
+    // const response = await fetch(`${API_BASE_URL}/articles/:${article_id}/like`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     credentials: 'include',
+    //     body: JSON.stringify({userId, article_id}),
+    // });
+}
 
 // Creates a new user (admin-level action or sign-up)
 export const createUser = async (userData) => { // Creates new user
