@@ -229,6 +229,24 @@ export const deleteLike = async (userId, articleId) => {
     });
 }
 
+export const postComment = async (userId, articleId, commentText) => {
+    const response = await fetch(`${API_BASE_URL}/articles/comment?articleId=${articleId}&userId=${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({commentText}),
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'User creation failed');
+    }
+
+    return await response.json();
+}
+
 // Creates a new user (admin-level action or sign-up)
 export const createUser = async (userData) => { // Creates new user
     const response = await fetch(`${API_BASE_URL}/users`, {

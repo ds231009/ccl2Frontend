@@ -1,32 +1,30 @@
-import React, {useEffect} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./BigArticle.module.css";
-import { useState } from "react";
 import * as apiServices from "../../services/apiService.js";
-import * as apiService from "../../services/apiService.js";
 
-const BigArticleCard = ({ article, detailed = false }) => {
+const BigArticleCard = ({ article, detailed = false, user }) => {
     const navigate = useNavigate();
-    const {id} = useParams();
+    const { id } = useParams();
 
     const [toggle, setToggle] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(null);
+    const [likes, setLikes] = useState(() => {
+        if (!Array.isArray(article.likes)) return -1;
+        return article.likes.length > 0 ? article.likes.length : "";
+    });
 
-
+    console.log("CHECK LIKE",article.likes, user)
 
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const data = await apiService.checkAuth();
-                console.log(data);
-                setUser(data.user);
-            } catch (err) {
-                setUser(null);
-            }
-        };
-        fetchUser();
-    }, []);
+        if (!user || !article || !Array.isArray(article.likes)) {
+            setToggle(false);
+            return;
+        }
+
+        const liked = article.likes.some(like => like.id === user.id);
+        setToggle(liked);
+    }, [user, article]);
 
 
     const handleLike = async () => {
@@ -36,9 +34,14 @@ const BigArticleCard = ({ article, detailed = false }) => {
         try {
             if (!toggle) {
                 await apiServices.postLike(user.id, id);
+                setLikes(prev => (typeof prev === "number" ? prev + 1 : 1));
                 setToggle(true);
             } else {
                 await apiServices.deleteLike(user.id, id);
+                setLikes(prev => {
+                    if (typeof prev !== "number") return "";
+                    return prev - 1 > 0 ? prev - 1 : "";
+                });
                 setToggle(false);
             }
         } catch (err) {
@@ -48,10 +51,6 @@ const BigArticleCard = ({ article, detailed = false }) => {
         }
     };
 
-
-
-
-
     if (!article) return null;
 
     const handleClick = () => {
@@ -60,12 +59,11 @@ const BigArticleCard = ({ article, detailed = false }) => {
 
     return (
         <div className={styles.firstArticle}>
-
-        <div
-            className={styles.FirstImageWrapper}
-            onClick={!detailed ? handleClick : undefined }
-            style={{ cursor: detailed ? "default" : "pointer" }}
-        >
+            <div
+                className={styles.FirstImageWrapper}
+                onClick={!detailed ? handleClick : undefined}
+                style={{ cursor: detailed ? "default" : "pointer" }}
+            >
                 <img
                     src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=1280`}
                     alt={article.title}
@@ -74,23 +72,29 @@ const BigArticleCard = ({ article, detailed = false }) => {
 
             <div
                 className={styles.Header}
-                onClick={!detailed ? handleClick : undefined }
+                onClick={!detailed ? handleClick : undefined}
                 style={{ cursor: detailed ? "default" : "pointer" }}
             >
-                <div  className={styles.Title}>
+                <div className={styles.Title}>
                     <h1>{article.title}</h1>
                     <div className={styles.Underline}></div>
                 </div>
-                <div onClick={handleLike} className={toggle ? "active" : "passive"}>
-                    <svg
-                        className={styles.likeSvg}
-                        viewBox="0 0 130 130"
+
+                {detailed && (
+                    <div
+                        onClick={handleLike}
+                        className={`${styles.Likes} ${toggle ? "active" : "passive"}`}
+                        title={!user ? "Login to like this article" : ""}
                     >
-                        <path
-                            className={styles.likeIcon}
-                            d="M 65,29 C 59,19 49,12 37,12 20,12 7,25 7,42 7,75 25,80 65,118 105,80 123,75 123,42 123,25 110,12 93,12 81,12 71,19 65,29 z"/>
-                    </svg>
-                </div>
+                        <span>{likes}</span>
+                        <svg className={styles.likeSvg} viewBox="0 0 130 130">
+                            <path
+                                className={styles.likeIcon}
+                                d="M 65,29 C 59,19 49,12 37,12 20,12 7,25 7,42 7,75 25,80 65,118 105,80 123,75 123,42 123,25 110,12 93,12 81,12 71,19 65,29 z"
+                            />
+                        </svg>
+                    </div>
+                )}
             </div>
 
             <span className={styles.metaInfo}>

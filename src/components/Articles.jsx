@@ -27,13 +27,11 @@ function ArticlesList() {
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     // Use useCallback to memoize the fetch function
     const fetchArticles = useCallback(async (currentPage = 1, reset = false) => {
         console.log("fetchArticles");
         setLoading(true);
-        setError(null);
 
         try {
             const data = await apiService.getArticles({
@@ -50,7 +48,7 @@ function ArticlesList() {
             setHasMore(data.length === 5); // assuming `size: 5` is your page size
             console.log("HAS MORE",hasMore, data ?? data.length > 0);
         } catch (err) {
-            setError(err.message);
+            navigate("/error", { state: { error: err } });
         } finally {
             setLoading(false);
         }
@@ -99,7 +97,7 @@ function ArticlesList() {
                 setTeams(teamsData);
                 setPlayers(playersData);
             } catch (err) {
-                console.error("Failed to load filter options", err);
+                navigate("/error", { state: { error: err } });
             }
         };
 
@@ -155,7 +153,6 @@ function ArticlesList() {
                     <button className="darkButton" onClick={handleLoadMore}>Load More</button>
                 )}
                 {loading && <p>Loading...</p>}
-                {error && <p>Error: {error}</p>}
             </main>
             <Footer />
         </>

@@ -63,13 +63,13 @@ function Header({ mode = "other", siteName = "" }) {
                     <CurrentDate />
                     :
                     <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "20px"}}>
-                        <Logo />
+                        <Logo style={"dif"}/>
                         <h2>{siteName}</h2>
                     </div>
 
                 }
                 {mode === 'home' ?
-                    <Logo /> : <div></div>
+                    <Logo styling={"dif"}/> : <div></div>
                 }
                 <div className="header-buttons">
                     {!user || !user.role ? (

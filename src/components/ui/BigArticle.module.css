@@ -101,7 +101,6 @@
     cursor: pointer;
 }
 
-
 :global(.passive) .likeSvg:hover {
     transform: scale(1.2);
 }
@@ -109,4 +108,11 @@
 :global(.active) path {
     fill-opacity: 1;
     background-color: var(--highlight-color-200);
+}
+
+.Likes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
 }

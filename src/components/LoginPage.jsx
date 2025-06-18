@@ -8,17 +8,15 @@ function Login() {
     const location = useLocation();
     const [mode, setMode] = useState(location.state?.mode === 'signup' ? 'signup' : 'login');
 
-    const [email, setEmail] = useState('jul@admin.com');
-    const [password, setPassword] = useState('admin');
-    const [name, setName] = useState('Ad');
-    const [lastName, setLastName] = useState('Min');
-    const [username, setUsername] = useState('Admin');
-    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
 
         try {
             if (mode === 'login') {
@@ -43,8 +41,8 @@ function Login() {
                 await apiService.login(userData.email, userData.password);
                 navigate('/articles');
             }
-        } catch (error) {
-            setError(error.message);
+        } catch (err) {
+            navigate("/error", { state: { error: err } });
         }
     };
 
@@ -52,7 +50,6 @@ function Login() {
         <>
             <div className={styles.FormCon}>
                 <h1>{mode === 'signup' ? 'Sign Up' : 'Log In'}</h1>
-                {error && <p className="error-message">{error}</p>}
                 <form onSubmit={handleSubmit} className="InputForm">
                     {mode === 'signup' && (
                         <>

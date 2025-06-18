@@ -6,6 +6,7 @@ import Article from "./components/Article.jsx";
 import Login from "./components/LoginPage.jsx";
 import Profile from "./components/ProfilePage.jsx";
 import CreateArticle from "./components/CreateArticle.jsx";
+import ErrorPage from "./components/Error.jsx";
 
 
 import AdminUsersPage from "./components/AdminUsersPage.jsx";
@@ -22,6 +23,8 @@ function App() {
         <Router>
             <Routes>
                 {/* Public Routes */}
+                <Route path={"*"} element={<ErrorPage /> }/>
+                <Route path={"/error"} element={<ErrorPage /> }/>
                 <Route path={"/"} element={<HomePage /> }/>
                 <Route path={"/login"} element={<Login /> }/>
                 <Route path="/profile" element={

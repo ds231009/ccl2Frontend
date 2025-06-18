@@ -4,12 +4,16 @@ import * as apiService from "../services/apiService";
 import Header from "./ui/Header.jsx";
 import Footer from "./ui/Footer.jsx";
 import styles from "./ProfilePage.module.css";
+import {useNavigate} from "react-router-dom";
+
 
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [authUser, setAuthUser] = useState(null);
     const [editInfo, setEditInfo] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
+
+    const navigate = useNavigate();
 
     const [infoForm, setInfoForm] = useState({
         id: "",
@@ -39,7 +43,7 @@ const ProfilePage = () => {
                 console.log("Auth user data:", data);
                 setAuthUser(data.user);
             } catch (err) {
-                console.error("Auth check failed", err);
+                navigate("/error", { state: { error: err } });
                 setUser(null);
             }
         };

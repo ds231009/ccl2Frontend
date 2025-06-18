@@ -4,12 +4,12 @@ import * as apiService from "../services/apiService";
 import Header from "./ui/Header.jsx";
 
 import styles from "./Admin.module.css";
+import {useNavigate} from "react-router-dom";
 
 function AdminUsersPage() {
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     const [roleFilter, setRoleFilter] = useState("all");
     const [sortKey, setSortKey] = useState("username");
@@ -18,6 +18,8 @@ function AdminUsersPage() {
     const [editUserId, setEditUserId] = useState(null);
     const [editFormData, setEditFormData] = useState({});
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -25,7 +27,7 @@ function AdminUsersPage() {
                 setUsers(data);
                 setLoading(false);
             } catch (err) {
-                setError(err.message);
+                navigate("/error", { state: { error: err } });
                 setLoading(false);
             }
         };
@@ -88,7 +90,6 @@ function AdminUsersPage() {
     };
 
     if (loading) return <p>Loading users...</p>;
-    if (error) return <p>Error: {error}</p>;
     if (!filteredUsers.length) return <p>No users found.</p>;
 
     return (

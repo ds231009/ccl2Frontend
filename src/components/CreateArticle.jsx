@@ -28,9 +28,6 @@ function CreateArticle() {
     const [games, setGames] = useState([]);
     const [authors, setAuthors] = useState([]);
 
-    const [error, setError] = useState(null);
-
-
     const handleAddFilter = (val, setter, currentList) => {
         console.log("handleAddFilter");
         if (!currentList.includes(val)) {
@@ -59,7 +56,7 @@ function CreateArticle() {
                 setPlayers(playersData);
                 setAuthors(authorsData.filter(user => user.role === 'journalist' || user.role === 'admin'));
             } catch (err) {
-                console.error("Failed to load filter options", err);
+                navigate("/error", { state: { error: err } });
             }
         };
 
@@ -76,7 +73,7 @@ function CreateArticle() {
                     prevAuthors.includes(userId) ? prevAuthors : [...prevAuthors, userId]
                 ));
             } catch (err) {
-                setError(err.message);
+                navigate("/error", { state: { error: err } });
             }
         };
         fetchUser();
@@ -85,7 +82,6 @@ function CreateArticle() {
 
     const handleSave = async (e) => {
         e.preventDefault();
-        setError('');
 
         const articleData = {
             title: title,
@@ -102,12 +98,9 @@ function CreateArticle() {
 
             navigate("/");
         } catch (error) {
-            setError(error.message);
+            navigate("/error", { state: { error: err } });
         }
     }
-
-
-    if (error) return <p>Error: {error}</p>;
 
     return (
         <>

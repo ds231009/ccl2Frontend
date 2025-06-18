@@ -9,22 +9,31 @@
     --dark-color-300: #151617;
     --highlight-color-100: #dd5c5c;
     --highlight-color-200: #cc4242;
+    --highlight-color-300: #af3636;
+    --highlight-color-400: #8f2626;
 }
 
-/** {*/
-/*    outline: 1px solid rgba(0,0,0,0.1);*/
-/*}*/
-
+/* Base styles */
 body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-    align-items: start;
     font-family: "Times New Roman", Times, serif;
     background-color: var(--light-color-100);
     color: var(--light-color-200);
+    align-items: start;
     transition: all 0.25s ease;
+}
+
+body.light {
+    background-color: var(--light-color-100);
+    color: var(--dark-color-300);
+}
+
+body.dark {
+    background-color: var(--dark-color-300);
+    color: var(--light-color-100);
 }
 
 #root {
@@ -34,22 +43,57 @@ body {
     flex-direction: column;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Typography */
+h1 {
+    margin: 10px 0 20px;
+}
+h2 {
+    margin: 0;
+}
+h3 {
+    margin: 5px 0;
+}
+p {
+    margin: 0;
+}
+dt {
+    font-weight: bold;
+}
+dd {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+/* Header */
 header {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-body.light header {background: var(--light-color-300)}
-body.dark header {background: var(--dark-color-200)}
+body.light header {
+    background: var(--light-color-300);
+}
+body.dark header {
+    background: var(--dark-color-200);
+}
 
 header > div {
     width: 90%;
     min-height: 60px;
     display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: center;
     justify-content: center;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 header > div > .column {
     flex: 1 1 30%;
@@ -58,185 +102,198 @@ header > div > .column {
 }
 
 .header-buttons {
-    max-width: 100%;
-    padding: 8px 0;
-    justify-self: flex-end;
-    width: fit-content;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+    width: fit-content;
+    max-width: 100%;
+    padding: 8px 0;
     gap: 5px;
 }
 
+/* Footer */
 footer {
     width: 100%;
     min-height: 60px;
     display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    font-size: 14px;
+}
+footer > .links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5vw;
+}
+footer > .logo-container {
+    height: 25px;
+}
+footer > div > .column {
+    flex: 1 1 30%;
+    min-width: 0;
+    word-wrap: break-word;
+}
+body.light footer {
+    background: var(--highlight-color-100);
+    color: var(--light-color-100);
+}
+body.dark footer {
+    background: var(--highlight-color-400);
 }
 
-footer > * {
-    align-self: center;
-    justify-self: center;
-}
-
-body.light footer { background: var(--light-color-200);}
-body.dark footer { background: var(--dark-color-200);}
-
-
+/* Main */
 main {
     flex: 1;
-    padding: 45px 0;
-    margin: 0;
-    gap: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.switchButton {
-    min-width: 28px;
-    height: 28px;
-    padding: 0;
+    padding: 45px 0;
     margin: 0;
-}
-.switchButton:hover {
-    min-width: 28px;
-    height: 28px;
-    padding: 0;
-    margin: 0;
+    gap: 10px;
 }
 
-body.light .switchButton {background: var(--light-color-100); color: var(--highlight-color-100); }
-body.light .switchButton:hover {background: var(--highlight-color-100); color: var(--light-color-500); }
-body.dark .switchButton {background: var(--dark-color-300); color: var(--highlight-color-200); }
-body.dark .switchButton:hover {background: var(--dark-color-100)}
-
-
-
+/* Buttons */
 button {
-    min-width: 90px;
-    height: 35px;
-    padding: 4px 12px;
     margin: 0;
     border: none;
     border-radius: 4px;
     font-family: "Times New Roman", Times, serif;
     font-size: 18px;
     text-align: center;
-    transition: all 0.25s  ease;
     cursor: pointer;
+    transition: all 0.25s ease;
     wrap-option: nowrap;
 }
 
-button:hover {
-    min-width: 95px;
-    padding: 4px 16px
-}
-
-
-body.light .lightButton {background: var(--highlight-color-100); color: var(--light-color-100); }
-body.light .lightButton:hover {background: var(--highlight-color-200)}
-body.dark  .lightButton {background: var(--highlight-color-200); color: var(--light-color-100); }
-body.dark  .lightButton:hover {background: var(--highlight-color-200)}
-
-body.light .darkButton {background: var(--dark-color-200); color: var(--light-color-100);}
-body.light .darkButton:hover {background: var(--dark-color-300)}
-body.dark .darkButton {background: var(--light-color-200);}
-body.dark .darkButton:hover {background: var(--light-color-300)}
-
-body.light .adminButton  {
-    background: var(--light-color-200);
-    border: 2px solid  var(--highlight-color-100);
-    color: var(--dark-color-200);
-}
-
-body.light .adminButton:hover {
-    background: var(--light-color-200);
-    border: 2px solid  var(--highlight-color-200);
-    color: var(--dark-color-100);
-}
-body.dark .adminButton  {
-    background: var(--dark-color-300);
-    border: 2px solid  var(--highlight-color-100);
-    color: var(--light-color-200);
-}
-
-body.dark .adminButton:hover {
-    background: var(--dark-color-200);
-    border: 2px solid  var(--highlight-color-200);
-    color: var(--light-color-100);
-}
-
-h1 {
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-h2 {
+.switchButton {
+    width: 28px;
+    height: 28px;
+    padding: 0;
     margin: 0;
 }
 
-h3 {
-    margin: 5px 0;
+.darkButton, .lightButton, .adminButton {
+    min-width: 90px;
+    height: 35px;
+    padding: 4px 12px;
 }
 
-p {
-    margin-top: 0;
-    margin-bottom: 0;
+.darkButton:hover, .lightButton:hover, .adminButton:hover {
+    min-width: 95px;
+    padding: 4px 16px;
 }
 
-body.dark {
-    background-color: var(--dark-color-300);
+/* Button color themes */
+body.light .switchButton {
+    background: var(--light-color-100);
+    color: var(--highlight-color-100);
+}
+body.light .switchButton:hover {
+    background: var(--highlight-color-100);
+    color: var(--light-color-500);
+}
+body.dark .switchButton {
+    background: var(--dark-color-300);
+    color: var(--highlight-color-200);
+}
+body.dark .switchButton:hover {
+    background: var(--dark-color-100);
+}
+
+body.light .lightButton {
+    background: var(--highlight-color-100);
+    color: var(--light-color-100);
+}
+body.light .lightButton:hover {
+    background: var(--highlight-color-200);
+}
+body.dark .lightButton {
+    background: var(--highlight-color-200);
+    color: var(--light-color-100);
+}
+body.dark .lightButton:hover {
+    background: var(--highlight-color-300);
+}
+
+body.light .darkButton {
+    background: var(--dark-color-200);
+    color: var(--light-color-100);
+}
+body.light .darkButton:hover {
+    background: var(--dark-color-300);
+}
+body.dark .darkButton {
+    background: var(--light-color-200);
+}
+body.dark .darkButton:hover {
+    background: var(--light-color-300);
+}
+
+body.light .adminButton {
+    background: var(--light-color-200);
+    border: 2px solid var(--highlight-color-100);
+    color: var(--dark-color-200);
+}
+body.light .adminButton:hover {
+    background: var(--light-color-200);
+    border: 2px solid var(--highlight-color-200);
+    color: var(--dark-color-100);
+}
+body.dark .adminButton {
+    background: var(--dark-color-300);
+    border: 2px solid var(--highlight-color-100);
+    color: var(--light-color-200);
+}
+body.dark .adminButton:hover {
+    background: var(--dark-color-200);
+    border: 2px solid var(--highlight-color-200);
     color: var(--light-color-100);
 }
 
-body.light {
-    background-color: var(--light-color-100);
+/* Form elements */
+input,
+textarea {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: var(--light-color-200);
+    text-indent: 8px;
+}
+body.light input,
+body.light textarea {
+    background: var(--light-color-200);
     color: var(--dark-color-300);
 }
+body.dark input,
+body.dark textarea {
+    background: var(--dark-color-200);
+    color: var(--light-color-100);
+}
 
-body.light input, body.light textarea { background: var(--light-color-200); color: var(--dark-color-300); }
-body.dark input, body.dark textarea { background: var(--dark-color-200); color: var(--light-color-100); }
-
-
+/* Definition list layout */
 dl {
     display: grid;
     grid-template-columns: max-content 1fr;
     row-gap: 0.5rem;
     column-gap: 1rem;
 }
-dt {
-    font-weight: bold;
-}
-dd {
-    font-size: 2.2rem;
-    margin: 0;
-}
 
-input, textarea {
-    width: 100%;
-    height: 40px;
-    margin: 0;
-    font-family: inherit;
-    font-size: 20px;
-    border: none;
-    border-radius: 5px;
-    background: var(--light-color-200);
-    text-indent: 8px;
-}
-
+/* Logo */
 .logo {
     height: auto;
-    fill: var(--light-color-100); /* default fill color */
+    fill: var(--light-color-100);
     transition: fill 0.3s ease;
 }
-
 
 .logo-container {
     height: 40px;
@@ -245,11 +302,19 @@ input, textarea {
     justify-content: center;
 }
 
+/* Forms */
 .InputForm {
     width: 300px;
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
     gap: 10px;
 }
+
+/* Debugging outline (commented out) */
+/**
+ * {
+ *     outline: 1px solid rgba(0,0,0,0.1);
+ * }
+ */

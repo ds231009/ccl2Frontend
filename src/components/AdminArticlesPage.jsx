@@ -3,18 +3,20 @@ import * as apiService from "../services/apiService";
 
 import Header from "./ui/Header.jsx";
 import styles from "./Admin.module.css";
+import {useNavigate} from "react-router-dom";
 
 function AdminArticlesPage() {
     const [articles, setArticles] = useState([]);
     const [filteredArticles, setFilteredArticles] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     const [sortKey, setSortKey] = useState("timestamp");
     const [sortOrder, setSortOrder] = useState("desc");
 
     const [editArticleId, setEditArticleId] = useState(null);
     const [editFormData, setEditFormData] = useState({});
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchArticles = async () => {
@@ -23,7 +25,7 @@ function AdminArticlesPage() {
                 setArticles(data);
                 setLoading(false);
             } catch (err) {
-                setError(err.message);
+                navigate("/error", { state: { error: err } });
                 setLoading(false);
             }
         };
@@ -93,12 +95,11 @@ function AdminArticlesPage() {
             setEditArticleId(null);
             setEditFormData({});
         } catch (err) {
-            alert("Failed to update article: " + err.message);
+            navigate("/error", { state: { error: err } });
         }
     };
 
     if (loading) return <p>Loading articles...</p>;
-    if (error) return <p>Error: {error}</p>;
     if (!filteredArticles.length) return <p>No articles found.</p>;
 
     return (
@@ -224,7 +225,7 @@ function AdminArticlesPage() {
                                     <td>{article.teams?.join(", ")}</td>
                                     <td>{article.players?.join(", ")}</td>
                                     <td className={styles.td}>
-                                        <button className="lightButton" onClick={() => handleEditClick(article)}>Edit</button>
+                                        <button className="darkButton" onClick={() => handleEditClick(article)}>Edit</button>
                                     </td>
                                 </>
                             )}
