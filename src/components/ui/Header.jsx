@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as apiService from "../../services/apiService";
-import styles from "./Header.module.css";
 
 import CurrentDate from "./CurrentDate";
 import Logo from "./Logo";
@@ -62,9 +61,9 @@ function Header({ mode = "other", siteName = "" }) {
                 {mode === 'home' ?
                     <CurrentDate />
                     :
-                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "20px"}}>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "30px"}}>
                         <Logo style={"dif"}/>
-                        <h2>{siteName}</h2>
+                        <h3>{siteName}</h3>
                     </div>
 
                 }
@@ -74,7 +73,7 @@ function Header({ mode = "other", siteName = "" }) {
                 <div className="header-buttons">
                     {!user || !user.role ? (
                         <>
-                            <button onClick={() => navigate("/login")}>Login</button>
+                            <button className="darkButton" onClick={() => navigate("/login")}>Login</button>
                             <button
                                 onClick={() => navigate("/login", { state: { mode: "signup" } })}
                                 className="lightButton"

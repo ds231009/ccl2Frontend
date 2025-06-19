@@ -72,7 +72,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1vh;
+    gap: 8px;
 }
 
 .smallArticlesHeader{
@@ -104,6 +104,26 @@
     align-content: center;
 
     border-radius: 2px;
+}
+
+.Icons {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 6px;
+
+}
+
+.Icons > div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.Icon {
+    fill: var(--highlight-color-100);
 }
 
 :global(body.dark) .ItemBox {

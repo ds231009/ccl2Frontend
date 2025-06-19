@@ -101,7 +101,7 @@ const BigArticleCard = ({ article, detailed = false, user }) => {
                 {"by "}
                 {article.authors?.map((user, index) => (
                     <span key={`${user.id}-${index}`}>
-                        {user.first_name} {user.last_name}
+                        {user.username}
                         {index < article.authors.length - 1 && ", "}
                     </span>
                 ))}

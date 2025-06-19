@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useState, useEffect} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import Footer from "./ui/Footer.jsx";
 import Header from "./ui/Header.jsx";
@@ -9,8 +9,6 @@ import Dropdown from "./ui/Dropdown.jsx";
 function CreateArticle() {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
-    const [userId, setUserId] = useState(null);
-
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
 
@@ -97,14 +95,14 @@ function CreateArticle() {
             console.log(data);
 
             navigate("/");
-        } catch (error) {
+        } catch (err) {
             navigate("/error", { state: { error: err } });
         }
     }
 
     return (
         <>
-            <Header siteName={"Publish"} />
+            <Header siteName={"Publish Article"} />
             <main>
                 <h2>Add Co-Authors or References</h2>
                 <div className={styles.Filters}>
@@ -147,14 +145,14 @@ function CreateArticle() {
                 </div>
                 <form className="InputForm" onSubmit={handleSave} style={{width: "70%"}}>
                     <input
-                           placeholder="title"
+                           placeholder="Add title"
                            type="text"
                            value={title}
                            onChange={(e) => setTitle(e.target.value)}
                            required
                     />
                     <textarea style={{width: "100%", minHeight: "120px"}}
-                           placeholder="text"
+                           placeholder="Add text"
                            value={text}
                            onChange={(e) => setText(e.target.value)}
                            required

@@ -35,3 +35,7 @@ dd {
 .halfForm {
     width: 48% !important
 }
+
+.EditCon {
+    transition: height 10.5s ease;
+}

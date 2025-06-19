@@ -6,7 +6,6 @@ import Header from "./ui/Header.jsx";
 import * as apiService from "../services/apiService";
 import styles from "./Article.module.css";
 import BigArticle from "./ui/BigArticle.jsx";
-import articles from "./Articles.jsx";
 
 function ArticlePage() {
     const { id } = useParams();
@@ -22,12 +21,17 @@ function ArticlePage() {
         if (!commentText.trim()) return;
 
         try {
-            const newComment = await apiService.postComment(user.id, article.id, commentText);
+            const response = await apiService.postComment(user.id, article.id, commentText);
 
+            const newComment = {
+                comment: commentText,
+                author: user.name,
+                timestamp: Date.now(),
+            }
             // Append new comment to article
             setArticle(prev => ({
                 ...prev,
-                comments : [...prev.comments, newComment],
+                comments : [newComment, ...prev.comments],
             }));
 
             // Clear input
@@ -38,12 +42,38 @@ function ArticlePage() {
         }
     };
 
+    function timeAgo(timestamp) {
+        const now = new Date();
+        const time = new Date(timestamp);
+        const diffInMinutes = Math.floor((now - time) / (1000 * 60));
+
+        if (diffInMinutes < 1) return 'just now';
+        if (diffInMinutes < 5) return '5min ago';
+        if (diffInMinutes < 10) return '10min ago';
+        if (diffInMinutes < 20) return '20min ago';
+        if (diffInMinutes < 30) return '30min ago';
+        if (diffInMinutes < 60) return '1h ago';
+
+        const diffInHours = Math.floor(diffInMinutes / 60);
+        if (diffInHours < 2) return '2h ago';
+        if (diffInHours < 4) return '4h ago';
+        if (diffInHours < 8) return '8h ago';
+        if (diffInHours < 12) return '12h ago';
+        if (diffInHours < 24) return '1d ago';
+
+        const diffInDays = Math.floor(diffInHours / 24);
+        return `${diffInDays}d ago`;
+    }
+
+
+
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const data = await apiService.checkAuth();
                 if (!data.user) throw new Error("No user");
+                console.log(data.user);
 
                 setUser(data.user);
             } catch (err) {
@@ -82,7 +112,7 @@ function ArticlePage() {
                 <div className={styles.Articles}>
                     <div onClick={() => navigate("/articles")} className={styles.GoBack}>🠈 Go back</div>
                     <BigArticle article={article} detailed={true} user={user}/>
-                    <div>
+                    <div className={styles.comments}>
                         <h2>Comment</h2>
                         <form onSubmit={handleCommentSubmit}>
                             <input
@@ -92,12 +122,23 @@ function ArticlePage() {
                                 placeholder="Write Comment..."
                             />
                             <button className="lightButton" type="submit">Comment</button>
+                        </form>
                             <div>
                                 {article.comments.map(comment => (
-                                    <div key={comment.id}><b> {comment.author}</b>: {comment.comment}</div>
+                                    <div className={styles.comment} key={comment.id}>
+                                        <div>
+                                            <b>{comment.author}</b>:
+                                            <p>{comment.comment}</p>
+                                        </div>
+
+                                        <span
+                                            className={`${styles.commentTime} ${timeAgo(comment.timestamp) === "just now" ? styles.active : ""}`}
+                                        >
+                                            {timeAgo(comment.timestamp)}
+                                        </span>
+                                    </div>
                                 ))}
                             </div>
-                        </form>
                     </div>
                 </div>
             </main>

@@ -23,7 +23,7 @@ export const signup = async (userData) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify(userData),
+        body: JSON.stringify(user^Data),
     });
     if (!response.ok) throw new Error('Sign up failed');
     return response.json();
