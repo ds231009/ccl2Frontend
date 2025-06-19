@@ -19,7 +19,6 @@ function HomePage() {
     const fetchArticles = async () => {
         try {
             const data = await apiService.getHomeArticles();
-            console.log(data);
             setArticles(data);
         } catch (err) {
             navigate("/error", { state: { error: err } });
@@ -32,8 +31,6 @@ function HomePage() {
     useEffect(() => {
         fetchArticles();
     }, []);
-
-    console.log(articles);
 
     if (loading) return <p>Loading articles...</p>;
     if (!articles || articles.length === 0) return <p>No article found.</p>;

@@ -18,8 +18,6 @@ function AdminRoute({ children }) {
 
                 const user = await res.json();
 
-                console.log(user.user.role);
-
                 if ((user.user.role !== "admin") && (user.user.role !== "journalist")) {
                     setStatus("unauthorized");
                     return;

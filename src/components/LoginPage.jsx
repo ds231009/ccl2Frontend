@@ -20,9 +20,7 @@ function Login() {
 
         try {
             if (mode === 'login') {
-                console.log(email, password);
                 const data = await apiService.login(email, password);
-                console.log(data);
 
                 navigate('/');
             } else {
@@ -33,8 +31,6 @@ function Login() {
                     email,
                     password,
                 };
-
-                console.log(userData)
 
                 await apiService.signup(userData);
 

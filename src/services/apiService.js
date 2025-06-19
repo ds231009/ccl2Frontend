@@ -2,7 +2,6 @@ const API_BASE_URL = 'http://localhost:3000';
 
 // Logs in a user with email and password
 export const login = async (email, password) => {
-    console.log(email, password);
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,7 +22,7 @@ export const signup = async (userData) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify(user^Data),
+        body: JSON.stringify(userData),
     });
     if (!response.ok) throw new Error('Sign up failed');
     return response.json();
@@ -59,7 +58,6 @@ export const getArticles = async (filters = {}) => {
 
     const query = new URLSearchParams(validFilters).toString();
     const url = `${API_BASE_URL}/articles${query ? `?${query}` : ""}`;
-    console.log("Fetching:", url);
 
     const response = await fetch(url, {
         credentials: 'include',
@@ -142,7 +140,6 @@ export const createArticle = async (articleData) => {
 // Fetches list of all games from references
 export const getGames = async () => {
     const url = `${API_BASE_URL}/references/games`;
-    console.log("Fetching:", url);
 
     const response = await fetch(url, {
         credentials: 'include',
@@ -155,7 +152,6 @@ export const getGames = async () => {
 // Fetches list of all teams from references
 export const getTeams = async () => {
     const url = `${API_BASE_URL}/references/teams`;
-    console.log("Fetching:", url);
 
     const response = await fetch(url, {
         credentials: 'include',
@@ -168,7 +164,6 @@ export const getTeams = async () => {
 // Fetches list of all players from references
 export const getPlayers = async () => {
     const url = `${API_BASE_URL}/references/players`;
-    console.log("Fetching:", url);
 
     const response = await fetch(url, {
         credentials: 'include',

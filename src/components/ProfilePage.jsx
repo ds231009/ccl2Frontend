@@ -37,10 +37,10 @@ const ProfilePage = () => {
                 const res = await fetch("http://localhost:3000/auth/check-auth", {
                     credentials: "include",
                 });
-                console.log("Auth check status:", res.status);
+
                 const data = await res.json();
                 if (!res.ok) throw new Error("Unauthorized");
-                console.log("Auth user data:", data);
+
                 setAuthUser(data.user);
             } catch (err) {
                 navigate("/error", { state: { error: err } });
@@ -60,7 +60,7 @@ const ProfilePage = () => {
                 const res = await fetch(`http://localhost:3000/users/${authUser.id}`, {
                     credentials: "include",
                 });
-                console.log("User fetch status:", res.status);
+
                 const data = await res.json();
                 if (!res.ok) throw new Error("Unauthorized");
                 console.log("User details:", data);
@@ -136,9 +136,6 @@ const ProfilePage = () => {
             alert(err.message || "Password update failed");
         }
     };
-
-
-    console.log("form2", infoForm)
 
     if (!user) return <p>Loading profile...</p>;
 
