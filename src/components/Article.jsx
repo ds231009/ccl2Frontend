@@ -25,7 +25,7 @@ function ArticlePage() {
 
             const newComment = {
                 comment: commentText,
-                author: user.name,
+                author: user.username,
                 timestamp: Date.now(),
             }
             // Append new comment to article
@@ -77,6 +77,7 @@ function ArticlePage() {
 
                 setUser(data.user);
             } catch (err) {
+                navigate("/error", { state: { error: err } });
                 setUser(null);
             }
         };

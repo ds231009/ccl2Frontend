@@ -6,6 +6,11 @@
 /*    fill: var(--dark-color-300);*/
 /*}*/
 
+.part1, .part2 {
+    transition: all 0.25s ease;
+}
+
+
 :global(body.dark) .part1 {fill: var(--light-color-200);}
 
 :global(body.light) .part1 {fill: var(--dark-color-300);}
@@ -13,3 +18,17 @@
 :global(body.dark) .part2 {fill: var(--highlight-color-200);}
 
 :global(body.light) .part2 {fill: var(--highlight-color-200);}
+
+
+
+:global(body.dark) .logo:hover .part1 {fill: var(--light-color-400);}
+
+:global(body.light) .logo:hover .part1 {fill: var(--dark-color-100);}
+
+:global(body.dark) .logo:hover .part2 {fill: var(--highlight-color-300);}
+
+:global(body.light) .logo:hover .part2 {fill: var(--highlight-color-300);}
+
+.logo {
+    height: 145px;
+}

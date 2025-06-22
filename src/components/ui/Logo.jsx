@@ -8,7 +8,7 @@ function Logo({styling= "dif"}) {
                 <svg
                     className={styles.logo}
                     style={{height: '100%' }}
-                    viewBox="0 0 36.021385 13.229167"
+                    viewBox="-2 -2 39.021385 16.229167"
                     version="1.1"
                     id="svg1">
                     <g

@@ -1,24 +1,22 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import * as apiService from "../services/apiService.js";
 
 function ProtectedRoute({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(null); // null = loading
 
     useEffect(() => {
-        const checkAuth = async () => {
+        const verifyAuth = async () => {
             try {
-                const res = await fetch("http://localhost:3000/auth/check-auth", {
-                    credentials: "include",
-                });
-
-                setIsAuthenticated(res.ok); // true for 200, false for 401/403
+                await apiService.checkAuth();         // reuses your function
+                setIsAuthenticated(true);  // success
             } catch (error) {
-                console.error("Network error while checking auth:", error);
-                setIsAuthenticated(false); // network failure (not just unauth)
+                console.error("Auth error:", error);
+                setIsAuthenticated(false); // error or 401
             }
         };
 
-        checkAuth();
+        verifyAuth();
     }, []);
 
     if (isAuthenticated === null) {

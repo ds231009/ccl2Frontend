@@ -1,4 +1,5 @@
 const API_BASE_URL = 'http://localhost:3000';
+// const API_BASE_URL = 'http://ds231009-10621.node.fhstp.cc/api';
 
 // Logs in a user with email and password
 export const login = async (email, password) => {
@@ -44,6 +45,28 @@ export const logout = async () => {
     });
     return response.ok;
 };
+
+export const updateUserPassword = async (userId, currentPassword, newPassword) => {
+    const response = await fetch(`${API_BASE_URL}/users/${userId}/password`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+            currentPassword,
+            newPassword,
+        }),
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Password update failed");
+    }
+
+    return true; // or return response.json() if server sends data
+};
+
 
 // --------- Articles ---------
 

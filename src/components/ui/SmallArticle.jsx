@@ -15,6 +15,7 @@ const SmallArticleCard = ({ article, detailed = false }) => {
                 <div className={styles.imageWrapper}>
                     <img
                         src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=300`}
+                        // src={`http://ds231009-10621.node.fhstp.cc/api/thumbnail/${article.img_path}.jpg?width=300`}
                         alt={article.title}
                     />
                 </div>

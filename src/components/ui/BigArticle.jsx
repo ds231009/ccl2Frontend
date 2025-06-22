@@ -66,6 +66,7 @@ const BigArticleCard = ({ article, detailed = false, user }) => {
             >
                 <img
                     src={`http://localhost:3000/thumbnail/${article.img_path}.jpg?width=1280`}
+                    // src={`http://ds231009-10621.node.fhstp.cc/api/thumbnail/${article.img_path}.jpg?width=1280`}
                     alt={article.title}
                 />
             </div>

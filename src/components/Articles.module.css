@@ -9,11 +9,12 @@
 }
 
 .Filters {
-    height: 160px;
+    /*height: 160px;*/
     display: flex;
     flex-direction: row;
     align-items: start;
     gap: 5px;
-    transition: all 0.5s ease;
     align-self: start;
+    flex-wrap: wrap;
+    transition: height 0.25s ease;
 }

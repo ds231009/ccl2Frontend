@@ -1,24 +1,16 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import * as apiService from "../services/apiService.js";
 
 function AdminRoute({ children }) {
     const [status, setStatus] = useState("loading"); // "loading", "unauthenticated", "unauthorized", "authorized"
 
     useEffect(() => {
-        const checkAuth = async () => {
+        const checkAdminAccess = async () => {
             try {
-                const res = await fetch("http://localhost:3000/auth/check-auth", {
-                    credentials: "include",
-                });
+                const userData = await apiService.checkAuth();
 
-                if (!res.ok) {
-                    setStatus("unauthenticated");
-                    return;
-                }
-
-                const user = await res.json();
-
-                if (user.user.role !== "admin") {
+                if (userData.user.role !== "admin") {
                     setStatus("unauthorized");
                     return;
                 }
@@ -30,8 +22,9 @@ function AdminRoute({ children }) {
             }
         };
 
-        checkAuth();
+        checkAdminAccess();
     }, []);
+
 
     if (status === "loading") return <div>Loading...</div>;
     if (status === "unauthenticated") return <Navigate to="/login" replace />;

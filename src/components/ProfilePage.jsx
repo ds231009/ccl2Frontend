@@ -6,7 +6,6 @@ import Footer from "./ui/Footer.jsx";
 import styles from "./ProfilePage.module.css";
 import {useNavigate} from "react-router-dom";
 
-
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [authUser, setAuthUser] = useState(null);
@@ -34,21 +33,17 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchAuthUser = async () => {
             try {
-                const res = await fetch("http://localhost:3000/auth/check-auth", {
-                    credentials: "include",
-                });
-
-                const data = await res.json();
-                if (!res.ok) throw new Error("Unauthorized");
-
+                const data = await apiService.checkAuth(); // reuse the centralized function
                 setAuthUser(data.user);
             } catch (err) {
                 navigate("/error", { state: { error: err } });
                 setUser(null);
             }
         };
+
         fetchAuthUser();
     }, []);
+
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -57,12 +52,7 @@ const ProfilePage = () => {
                 return;
             }
             try {
-                const res = await fetch(`http://localhost:3000/users/${authUser.id}`, {
-                    credentials: "include",
-                });
-
-                const data = await res.json();
-                if (!res.ok) throw new Error("Unauthorized");
+                const data = await apiService.getUserById(authUser.id); // use shared function
                 console.log("User details:", data);
                 setUser(data);
                 setInfoForm({
@@ -113,27 +103,12 @@ const ProfilePage = () => {
     const handlePasswordSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch(`http://localhost:3000/users/${user.id}/password`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({
-                    currentPassword: passwordForm.current,
-                    newPassword: passwordForm.new,
-                }),
-            });
-
-            if (!res.ok) {
-                const errorData = await res.json();
-                throw new Error(errorData.message || "Password update failed");
-            }
+            await apiService.updateUserPassword(user.id, passwordForm.current, passwordForm.new);
 
             setPasswordForm({ current: "", new: "" });
             setEditPassword(false);
-            alert("Password changed successfully.");
         } catch (err) {
             console.error("Password update failed", err);
-            alert(err.message || "Password update failed");
         }
     };
 

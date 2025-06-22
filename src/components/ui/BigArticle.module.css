@@ -24,6 +24,13 @@
     width: 100%;
     align-self: center;
     justify-self: center;
+    transition: all 0.25s ease;
+    filter: brightness(0.95);
+}
+
+.firstArticle:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.05);
 }
 
 .Header {
@@ -43,7 +50,6 @@
 
 .Title h1 {
     margin: 0;
-    font-size: 1.75rem;
 }
 
 .Underline {

@@ -23,6 +23,7 @@
 body {
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     font-family: "Times New Roman", Times, serif;
@@ -142,9 +143,7 @@ footer > .links {
     align-items: center;
     gap: 5vw;
 }
-footer > .logo-container {
-    height: 25px;
-}
+
 footer > div > .column {
     flex: 1 1 30%;
     min-width: 0;
@@ -155,7 +154,7 @@ body.light footer {
     color: var(--light-color-200);
 }
 body.dark footer {
-    background: var(--dark-color-100);
+    background: var(--dark-color-200);
 }
 
 /* Main */
@@ -316,6 +315,11 @@ dl {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.125s ease;
+}
+
+header .logo-container:hover {
+    transform: scale(105%);
 }
 
 /* Forms */
@@ -326,6 +330,17 @@ dl {
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+
+
+@media screen and (max-width: 800px) {
+    h2 {
+        font-size: 20px;
+    }
+    h3 {
+        font-size: 18px;
+    }
 }
 
 /* Debugging outline (commented out) */
