@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <script>
-        // Redirect everything back to index.html
-        sessionStorage.redirect = location.href;
-        location.replace("/");
-    </script>
-</head>
-<body></body>
-</html>
+<script>
+    window.location.replace(window.location.pathname.replace(/^\/ccl2Frontend/, '/ccl2Frontend/#'));
+</script>
