@@ -1,5 +1,5 @@
-const API_BASE_URL = 'http://localhost:3000';
-// const API_BASE_URL = 'http://ds231009-10621.node.fhstp.cc/api';
+// const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://ds231009-10621.node.fhstp.cc/api';
 
 // Logs in a user with email and password
 export const login = async (email, password) => {
